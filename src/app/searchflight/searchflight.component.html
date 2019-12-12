@@ -1,5 +1,6 @@
 <form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
 
+  <div class = "container">
   <div class = "row">
   <ng-container *ngFor="let eachConfig of formConfig1">
       <div class = "App-search" class = {{eachConfig.text}}>
@@ -68,8 +69,9 @@
     </div>
   </ng-container>
   </div>
+  </div>
 
   <input class = "btn btn-info" type = "submit" value = "Search Flight"
-         [disabled]="searchflightForm.dirty" >
+         [disabled]="searchflightForm.invalid" >
 
 </form>
