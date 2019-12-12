@@ -10,17 +10,22 @@
 .leftbox {
   float:left;
   width:40%;
+  margin-left: 100px;
   background-color: white;
   height:100px;
 }
 .rightbox {
   float:right;
   width:40%;
-  /*margin-right: 5px;*/
+  margin-left: 100px;
   background-color: white;
   height:100px;
 }
 
 .label {
-  background-color: white;
+  margin-left: 0px;
+  text-align: left;
+  color: mediumslateblue;
+  font-weight: normal;
+  font-size: large;
 }

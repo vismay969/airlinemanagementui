@@ -22,17 +22,17 @@ export class SearchflightComponent implements OnInit {
     constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
   ];
   formConfig2: any[] = [
-    {name: 'dept_date', type: 'date', label: 'Departure Date',
+    {name: 'dept_date', type: 'date', label: 'Departure Date', text : 'leftbox',
       errorMsg: 'Departure Date Required',
       constraint: Validators.required},
   ];
   formConfig3: any[] = [
-    {name: 'class', type: 'text', label: 'Class Type',
+    {name: 'class', type: 'text', label: 'Class Type', text : 'leftbox',
       errorMsg: 'Flight Class Required',
       constraint: [Validators.required, Validators.minLength(1), Validators.maxLength(10)] },
   ];
   formConfig4: any[] = [
-    {name: 'noofseats', type: 'number', label: 'No. of Seats',
+    {name: 'noofseats', type: 'number', label: 'No. of Seats', text : 'rightbox',
       errorMsg: 'No. of Seats Required',
       constraint: [Validators.required, Validators.max(5), Validators.min(1)] },
   ];

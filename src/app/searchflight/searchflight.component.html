@@ -1,8 +1,9 @@
 <form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
 
+  <div class = "row">
   <ng-container *ngFor="let eachConfig of formConfig1">
-      <div class = "col-md-12" class = {{eachConfig.text}}>
-      <label>{{eachConfig.label}}</label>
+      <div class = "App-search" class = {{eachConfig.text}}>
+      <label class = "label">{{eachConfig.label}}</label>
       <select formControlName= {{eachConfig.name}}
               class="form-control" >
         <option *ngFor="let eachAirport of airportList"
@@ -14,12 +15,13 @@
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
       </div>
-
   </ng-container>
+  </div>
 
+  <div class = "row">
   <ng-container *ngFor="let eachConfig of formConfig2">
-    <div class = "row" class = "col-md-6" class = "App-search">
-      <label>{{eachConfig.label}}</label>
+    <div class = {{eachConfig.text}}>
+      <label class = "label">{{eachConfig.label}}</label>
       <input type ={{eachConfig.type}}
              formControlName={{eachConfig.name}}
              class="form-control">
@@ -31,10 +33,12 @@
     </div>
 
   </ng-container>
+  </div>
 
+  <div class = "row">
   <ng-container *ngFor="let eachConfig of formConfig3">
-    <div class = "col-md-6" class = "App-search">
-      <label>{{eachConfig.label}}</label>
+    <div class = "cols-md-6" class = {{eachConfig.text}}>
+      <label class = "label">{{eachConfig.label}}</label>
       <select formControlName= {{eachConfig.name}}
               class="form-control" >
         <option *ngFor="let eachFlightClass of FlightClass"
@@ -48,9 +52,10 @@
     </div>
   </ng-container>
 
+
   <ng-container *ngFor="let eachConfig of formConfig4">
-    <div class = "col-md-6" class = "App-search">
-      <label>{{eachConfig.label}}</label>
+    <div class = "col-md-6" class = {{eachConfig.text}}>
+      <label class = "label">{{eachConfig.label}}</label>
       <select formControlName= {{eachConfig.name}}
               class="form-control" >
         <option *ngFor="let eachCount of PassengerCount"
@@ -62,8 +67,9 @@
       </span>
     </div>
   </ng-container>
+  </div>
 
-
-  <input type = "submit" value = "Search Flight" [disabled]="searchflightForm.invalid">
+  <input class = "btn btn-info" type = "submit" value = "Search Flight"
+         [disabled]="searchflightForm.dirty" >
 
 </form>
