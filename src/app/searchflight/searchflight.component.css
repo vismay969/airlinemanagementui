@@ -1,0 +1,26 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+.App-search {
+  background-color: white;
+  min-height: 10vh;
+  font-size: calc(10px + 2vmin);
+}
+
+.leftbox {
+  float:left;
+  width:40%;
+  background-color: white;
+  height:100px;
+}
+.rightbox {
+  float:right;
+  width:40%;
+  /*margin-right: 5px;*/
+  background-color: white;
+  height:100px;
+}
+
+.label {
+  background-color: white;
+}

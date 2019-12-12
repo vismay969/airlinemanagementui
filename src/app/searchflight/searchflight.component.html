@@ -1,40 +1,69 @@
 <form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
 
-  <ng-container *ngFor="let eachConfig of formConfig">
-    <div class = "col-md-8">
+  <ng-container *ngFor="let eachConfig of formConfig1">
+      <div class = "col-md-12" class = {{eachConfig.text}}>
       <label>{{eachConfig.label}}</label>
       <select formControlName= {{eachConfig.name}}
               class="form-control" >
-        <option *ngFor="let eachAirport of Airports"
-                [value]='eachAirport'>{{eachAirport}}</option>
+        <option *ngFor="let eachAirport of airportList"
+                [value]='eachAirport'>{{eachAirport.location_abbr}}</option>
       </select>
 
-      <!--  <span *ngIf="loginForm.controls.userName.invalid">Error</span>-->
       <span
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
+      </div>
+
+  </ng-container>
+
+  <ng-container *ngFor="let eachConfig of formConfig2">
+    <div class = "row" class = "col-md-6" class = "App-search">
+      <label>{{eachConfig.label}}</label>
+      <input type ={{eachConfig.type}}
+             formControlName={{eachConfig.name}}
+             class="form-control">
 
       <span
-        *ngIf="searchflightForm.get(eachConfig.name).hasError('maxlength')
-        && searchflightForm.get(eachConfig.name).touched">{{" 'max length error' "}}
+        *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
+              && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
-
     </div>
 
   </ng-container>
 
-  <!--<ng-container *ngFor="let eachConfig of formConfig1">
-    <div class = "col-md-8">
+  <ng-container *ngFor="let eachConfig of formConfig3">
+    <div class = "col-md-6" class = "App-search">
       <label>{{eachConfig.label}}</label>
-
-      <select formControlName= {{eachConfig.name}} >
-        <option *ngFor="let eachLoanType of eachConfig.name"
-            [value]='eachLoanType'>{{eachLoanType}}</option>
+      <select formControlName= {{eachConfig.name}}
+              class="form-control" >
+        <option *ngFor="let eachFlightClass of FlightClass"
+                [value]='eachFlightClass'>{{eachFlightClass}}</option>
       </select>
+
+      <span
+        *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
+              && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
+      </span>
     </div>
   </ng-container>
--->
+
+  <ng-container *ngFor="let eachConfig of formConfig4">
+    <div class = "col-md-6" class = "App-search">
+      <label>{{eachConfig.label}}</label>
+      <select formControlName= {{eachConfig.name}}
+              class="form-control" >
+        <option *ngFor="let eachCount of PassengerCount"
+                [value]='eachCount'>{{eachCount}}</option>
+      </select>
+      <span
+        *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
+              && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
+      </span>
+    </div>
+  </ng-container>
+
+
   <input type = "submit" value = "Search Flight" [disabled]="searchflightForm.invalid">
 
 </form>

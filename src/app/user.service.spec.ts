@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CompinteractionService } from './compinteraction.service';
+import { CompinteractionService } from './user.service';
 
 describe('CompinteractionService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

@@ -10,15 +10,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  // {path: '', redirectTo: 'home', pathMatch: 'full'},
-  // {path: 'login', component: LoginComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
   // {path: 'logout', component: LogoutComponent},
   // {path: 'addcustomer', component: AddloancustomerComponent},
   // {path: 'showcustomer', component: ShowcustomerComponent},
   // {path: 'passenger', component: ShowpassengerComponent},
-  // {path: '**', redirectTo: 'login'}
+  {path: '**', redirectTo: 'home'}
 
 ];
 @NgModule({
@@ -27,7 +28,8 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     MenuComponent,
-    SearchflightComponent
+    SearchflightComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,

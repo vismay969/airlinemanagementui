@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {CompinteractionService} from '../compinteraction.service';
+import {UserService} from '../user.service';
+import {AirportMaster} from '../airport-master';
 
 @Component({
   selector: 'app-searchflight',
@@ -10,45 +11,62 @@ import {CompinteractionService} from '../compinteraction.service';
 })
 
 export class SearchflightComponent implements OnInit {
+  airportList: AirportMaster[];
   searchflightForm: FormGroup;
-  formConfig: any[] = [
-  {name: 'dept_abbr', type: 'text', label: 'Departure Airport',
+  formConfig1: any[] = [
+  {name: 'dept_abbr', type: 'text', label: 'Departure Airport', text : 'leftbox',
     errorMsg: 'Departure Airport Required',
     constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
-  {name: 'arr_abbr', type: 'text', label: 'Arrival Airport',
+  {name: 'arr_abbr', type: 'text', label: 'Arrival Airport', text : 'rightbox',
     errorMsg: 'Arrival Airport Required',
     constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
   ];
-  formConfig1: any[] = [
+  formConfig2: any[] = [
     {name: 'dept_date', type: 'date', label: 'Departure Date',
       errorMsg: 'Departure Date Required',
       constraint: Validators.required},
-    {name: 'noofseats', type: 'number', label: 'No. of Seats',
-      errorMsg: 'No. of Seats cannot be zero.',
-      constraint: [Validators.required, Validators.max(5), Validators.min(1)] },
+  ];
+  formConfig3: any[] = [
     {name: 'class', type: 'text', label: 'Class Type',
       errorMsg: 'Flight Class Required',
-      constraint: [Validators.required, Validators.minLength(1), Validators.maxLength(1)] },
+      constraint: [Validators.required, Validators.minLength(1), Validators.maxLength(10)] },
+  ];
+  formConfig4: any[] = [
+    {name: 'noofseats', type: 'number', label: 'No. of Seats',
+      errorMsg: 'No. of Seats Required',
+      constraint: [Validators.required, Validators.max(5), Validators.min(1)] },
   ];
 private loginStatus = 'invalid user';
-Airports = ['BOM', 'AHD'];
+Airports = ['BOM', 'AHD', 'CHN', 'DEL', 'HYD'];
+FlightClass = ['Business', 'Economy'];
+PassengerCount = [1, 2, 3, 4, 5];
 
-constructor(private fb: FormBuilder, private router: Router, private service: CompinteractionService) { }
+constructor(private fb: FormBuilder, private router: Router, private service: UserService) { }
 
 ngOnInit() {
+  this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
 }
 
 createForm(): FormGroup {
   const group = this.fb.group({});
-  this.formConfig.forEach(eachConfig => {
-    group.addControl(eachConfig.name, new FormControl(
-      '', {validators: eachConfig.constraint}));
-  });
   this.formConfig1.forEach(eachConfig => {
     group.addControl(eachConfig.name, new FormControl(
       '', {validators: eachConfig.constraint}));
   });
+  this.formConfig2.forEach(eachConfig => {
+    group.addControl(eachConfig.name, new FormControl(
+      '', {validators: eachConfig.constraint}));
+  });
+  this.formConfig3.forEach(eachConfig => {
+    group.addControl(eachConfig.name, new FormControl(
+      '', {validators: eachConfig.constraint}));
+  });
+  this.formConfig4.forEach(eachConfig => {
+    group.addControl(eachConfig.name, new FormControl(
+      '', {validators: eachConfig.constraint}));
+  });
+
   // group.setValidators(validatePassword);
   return group;
 }

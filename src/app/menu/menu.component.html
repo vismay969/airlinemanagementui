@@ -1,1 +1,12 @@
-<p>menu works!</p>
+<ul>
+  <li *ngFor = "let eachLink of links">
+    <!--    <a href = "{{eachLink}}">{{eachLink}}</a>-->
+    <a [routerLink]="[eachLink.link]">{{eachLink.text}}</a>
+
+  </li>
+  <li><a [routerLink]="['/login']" [ngStyle]="{display: showLogin}">Login</a> </li>
+  <li><a [routerLink]="['logout']" [ngStyle]="{display: showLogout}">Logout</a> </li>
+
+</ul>
+
+
