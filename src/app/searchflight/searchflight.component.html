@@ -1,1 +1,40 @@
-<p>searchflight works!</p>
+<form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
+
+  <ng-container *ngFor="let eachConfig of formConfig">
+    <div class = "col-md-8">
+      <label>{{eachConfig.label}}</label>
+      <select formControlName= {{eachConfig.name}}
+              class="form-control" >
+        <option *ngFor="let eachAirport of Airports"
+                [value]='eachAirport'>{{eachAirport}}</option>
+      </select>
+
+      <!--  <span *ngIf="loginForm.controls.userName.invalid">Error</span>-->
+      <span
+        *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
+              && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
+      </span>
+
+      <span
+        *ngIf="searchflightForm.get(eachConfig.name).hasError('maxlength')
+        && searchflightForm.get(eachConfig.name).touched">{{" 'max length error' "}}
+      </span>
+
+    </div>
+
+  </ng-container>
+
+  <!--<ng-container *ngFor="let eachConfig of formConfig1">
+    <div class = "col-md-8">
+      <label>{{eachConfig.label}}</label>
+
+      <select formControlName= {{eachConfig.name}} >
+        <option *ngFor="let eachLoanType of eachConfig.name"
+            [value]='eachLoanType'>{{eachLoanType}}</option>
+      </select>
+    </div>
+  </ng-container>
+-->
+  <input type = "submit" value = "Search Flight" [disabled]="searchflightForm.invalid">
+
+</form>
