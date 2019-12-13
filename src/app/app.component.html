@@ -7,34 +7,31 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<div></div>
-<div style="text-align: center">
-
-  <header>
-    <div class="col-md-12">
-      <h1>
-<!--        {{title}}!-->
-      </h1>
+<div class="main-container">
+  <div class="header">
+    <header>
       <app-header></app-header>
-    </div>
-    <div class="col-md-12">
+    </header>
+  </div>
+  <div class = "nav">
+    <header>
       <app-menu></app-menu>
-    </div>
-  </header>
-
-  <section class="row">
-    <div class="col-md-12">
+    </header>
+  </div>
+  <div class="section">
+    <section>
       <router-outlet></router-outlet>
       <app-searchflight></app-searchflight>
-
-    </div>
-  </section>
-
-  <footer>
-    <app-footer></app-footer>
-  </footer>
-
+    </section>
+  </div>
+  <div class="footer">
+    <footer>
+      <app-footer></app-footer>
+    </footer>
+  </div>
 </div>
+
+
 
 
 
