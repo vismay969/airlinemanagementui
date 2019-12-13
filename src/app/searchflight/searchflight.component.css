@@ -4,17 +4,17 @@
 
 .leftbox {
   float:left;
-  width:40%;
+  width:45%;
   margin-top: 20px;
-  margin-left: 5px;
+  margin-left: 10px;
   /*background-color: white;*/
   height:100px;
 }
 .rightbox {
   float:right;
-  width:40%;
+  width:45%;
   margin-top: 20px;
-  margin-left: 5px;
+  margin-left: 25px;
   /*background-color: white;*/
   height:100px;
 }

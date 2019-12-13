@@ -6,13 +6,14 @@
 
   <ng-container *ngFor="let eachConfig of formConfig1">
       <div class = {{eachConfig.text}}>
+      <div class = "form-group">
       <label>{{eachConfig.label}}</label>
       <select formControlName= {{eachConfig.name}}
               class="form-control" >
         <option *ngFor="let eachAirport of airportList"
                 [value]='eachAirport.location_abbr'>{{eachAirport.location_abbr}}</option>
       </select>
-
+      </div>
       <span
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
