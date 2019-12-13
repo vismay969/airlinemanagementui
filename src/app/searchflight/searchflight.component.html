@@ -1,14 +1,16 @@
-<form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
-
-  <div class = "container">
+<div class = "container">
   <div class = "row">
+    <div class = "col-md-12" *ngIf="!isOn">
+  <form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
+  <div class = "row">
+
   <ng-container *ngFor="let eachConfig of formConfig1">
       <div class = {{eachConfig.text}}>
       <label>{{eachConfig.label}}</label>
       <select formControlName= {{eachConfig.name}}
               class="form-control" >
         <option *ngFor="let eachAirport of airportList"
-                [value]='eachAirport'>{{eachAirport.location_abbr}}</option>
+                [value]='eachAirport.location_abbr'>{{eachAirport.location_abbr}}</option>
       </select>
 
       <span
@@ -76,6 +78,16 @@
        <input class = "btn btn-info" type = "submit" value = "Search Flight">
       </span>
   </div>
-  </div>
+
+
+
 
 </form>
+    </div>
+  <div class="col-md-12">
+  <app-displayflightdetails [flightSelection]= 'flightList' [classSelected] = 'psgClass' [passengerCount] = 'seatsBus'
+                            (flightSelected)='onReceipt($event)' *ngIf="isOn"></app-displayflightdetails>
+
+  </div>
+  </div>
+</div>

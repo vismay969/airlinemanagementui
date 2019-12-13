@@ -14,7 +14,8 @@ export class MenuComponent implements OnInit {
 
   links: Navlink[] = [
     // {link: 'login', text: 'Login'},
-    {link: 'info', text: 'About Us'},
+    {link: 'home', text: 'Home'},
+    {link: 'list', text: 'About Us'},
     {link: 'userhistory', text: 'My Booking'},
     {link: 'userflight', text: 'Book Flight'}];
 

@@ -1,0 +1,27 @@
+html
+<p>bookinginfo works!</p>
+<form (ngSubmit)="onSubmit(frm.value)" #frm="ngForm" >
+
+  <div class = "container">
+    <div class = "row">
+      <div>
+        <label   display="none">Customer Email Id: </label>
+        <input type="email"[(ngModel)]="bookingInfo.cust_email" placeholder="Email Id" name="cust_email"  required="required">
+      </div>
+      <div>
+        <label  >Credit Card No: </label>
+        <input type="number"[(ngModel)]="bookingInfo.credit_card_info" placeholder="Credit Card No." name="credit_card_info"  required="required">
+
+
+      </div>
+
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </div>
+  </div>
+</form>
+<!--
+{{frm.value|json}}
+-->
+
+

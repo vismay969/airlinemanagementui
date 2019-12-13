@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CompinteractionService } from './user.service';
+import { UserService } from './user.service';
 
-describe('CompinteractionService', () => {
+describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CompinteractionService = TestBed.get(CompinteractionService);
+    const service: UserService = TestBed.get(UserService);
     expect(service).toBeTruthy();
   });
 });

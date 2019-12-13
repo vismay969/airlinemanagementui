@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../user.service';
-import {AirportMaster} from '../airport-master';
+import {AirportMaster} from '../airportmaster';
+import {Observable} from 'rxjs';
+import {FlightList} from '../flightlist';
 
 @Component({
   selector: 'app-searchflight',
@@ -11,6 +13,11 @@ import {AirportMaster} from '../airport-master';
 })
 
 export class SearchflightComponent implements OnInit {
+  flightList: FlightList[];
+  psgClass: string;
+  seatsBus: number ;
+  seatsFirst: number;
+  isOn = false;
   airportList: AirportMaster[];
   searchflightForm: FormGroup;
   formConfig1: any[] = [
@@ -76,10 +83,30 @@ onSubmit() {
   console.log(this.searchflightForm.get('dept_abbr').value);
   console.log(this.searchflightForm.get('arr_abbr').value);
   console.log(this.searchflightForm.get('dept_date').value);
-  const noofseats = this.searchflightForm.get('noofseats').value;
-  // this.router.navigate(['/showcustomer']);
+  console.log(this.searchflightForm.get('class').value);
+  console.log(this.searchflightForm.get('noofseats').value);
+  const depAbbr = this.searchflightForm.get('dept_abbr').value;
+  const arrAbbr = this.searchflightForm.get('arr_abbr').value;
+  const depDate = this.searchflightForm.get('dept_date').value;
+  this.psgClass = this.searchflightForm.get('class').value;
+  if (this.psgClass === 'Business') {
+    this.seatsBus = this.searchflightForm.get('noofseats').value;
+    this.seatsFirst = 0;
+  } else {
+    this.seatsBus = 0;
+    this.seatsFirst = this.searchflightForm.get('dept_abbr').value;
   }
+  // this.router.navigate(['/showcustomer']);
+  this.service.searchUserFlights(this.seatsBus, this.seatsFirst, depAbbr, arrAbbr, depDate)
+    .subscribe(data => {
+      this.flightList = data;
+      this.isOn = true;
+    })
 
+  console.log(this.flightList);
 }
 
-
+  onReceipt(val) {
+    console.log(val);
+  }
+}
