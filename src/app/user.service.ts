@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AirportMaster} from './airportmaster';
 import {FlightList} from './flightlist';
 import {BookingInfo} from './bookinginfo';
+import {UserDetails} from './userdetail';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,23 @@ export class UserService {
 
   addBookingEntry(bookingInfoData: BookingInfo): Observable<BookingInfo> {
     console.log('in observable ' + bookingInfoData)
-    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + '1' + '/' + '16', bookingInfoData);
+    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + '1' + '/' + '15', bookingInfoData);
+  }
+
+  // add in user service
+  findAllBookingInfobyUserId(userId: number): Observable<BookingInfo[]> {
+    return this.client.get<BookingInfo[]>(this.baseURL + '/bookingInfo/' + userId);
+  }
+
+ /* addUser(user: Userdetails): Observable<Userdetails> {
+    return this.client.post<Userdetails>(this.baseURL + '/user' , user);
+
+  }*/
+
+  findByUserName(userName: string): Observable<UserDetails> {
+    console.log('In FindByUserName ');
+    console.log(userName);
+    return this.client.get<UserDetails>(this.baseURL + '/user/' + userName);
   }
 
 }

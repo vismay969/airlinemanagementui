@@ -1,0 +1,28 @@
+<!--{{bookingList[0].booking_id |json}}-->
+
+<!--{{bookingList|json}} print the value in json-->
+
+
+<table class="table table-striped">
+  <tr>
+    <!--    <th>From</th>-->
+    <!--    <th>To</th>-->
+    <!--    <th>Airline</th>-->
+    <th>Flight Date</th>
+    <th>Customer Email</th>
+    <th>Class</th>
+    <th>Passenger Count</th>
+    <th>Total Fare</th>
+
+  </tr>
+  <tr *ngFor="let eachBooking of bookingList  | paginate : {itemsPerPage:4,currentPage:p}" >
+
+    <td>{{eachBooking.flightDate| date}}</td>
+    <td>{{eachBooking.cust_email}}</td>
+    <td>{{eachBooking.class_type}}</td>
+    <td>{{eachBooking.noOfPass}}</td>
+    <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
+<!--    <td><button (click) = "cancelBookingEntry(eachBooking)" class="btn btn-danger fa fa-remove"></button></td>-->
+  </tr>
+</table>
+<pagination-controls (pageChange) = "p=$event"></pagination-controls>

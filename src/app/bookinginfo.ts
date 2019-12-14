@@ -1,7 +1,7 @@
 export interface BookingInfo {
 
   booking_id: number;
-  flight_date: Date;
+  flightDate: string;
   cust_email: string;
   noOfPass: number;
   class_type: string;

@@ -5,6 +5,7 @@ import {UserService} from '../user.service';
 import {AirportMaster} from '../airportmaster';
 import {Observable} from 'rxjs';
 import {FlightList} from '../flightlist';
+import {BookingInfo} from '../bookinginfo';
 
 @Component({
   selector: 'app-searchflight',
@@ -14,10 +15,12 @@ import {FlightList} from '../flightlist';
 
 export class SearchflightComponent implements OnInit {
   flightList: FlightList[];
+  selectedFlight: FlightList;
   psgClass: string;
   seatsBus: number ;
   seatsFirst: number;
-  isOn = false;
+  displayFlightList = false;
+  bookFlight = false;
   airportList: AirportMaster[];
   searchflightForm: FormGroup;
   formConfig1: any[] = [
@@ -44,9 +47,8 @@ export class SearchflightComponent implements OnInit {
       constraint: [Validators.required, Validators.max(5), Validators.min(1)] },
   ];
 private loginStatus = 'invalid user';
-Airports = ['BOM', 'AHD', 'CHN', 'DEL', 'HYD'];
-FlightClass = ['Business', 'Economy'];
-PassengerCount = [1, 2, 3, 4, 5];
+FlightClass = ['Business', 'First'];
+PassengerCount = [1, 2, 3, 4, 5, 6];
 
 constructor(private fb: FormBuilder, private router: Router, private service: UserService) { }
 
@@ -100,13 +102,23 @@ onSubmit() {
   this.service.searchUserFlights(this.seatsBus, this.seatsFirst, depAbbr, arrAbbr, depDate)
     .subscribe(data => {
       this.flightList = data;
-      this.isOn = true;
-    })
-
-  console.log(this.flightList);
+      this.displayFlightList = true;
+      console.log(this.flightList);
+    });
 }
 
   onReceipt(val) {
     console.log(val);
+    this.selectedFlight = val;
+    this.displayFlightList = false;
+    this.bookFlight = true;
+  }
+
+  onReturn(val) {
+    console.log(val);
+    this.displayFlightList = false;
+    this.bookFlight = false;
+    this.searchflightForm.reset();
+
   }
 }

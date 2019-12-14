@@ -1,6 +1,6 @@
 <div class = "container">
   <div class = "row">
-    <div class = "col-md-12" *ngIf="!isOn">
+    <div class = "col-md-12" *ngIf="!displayFlightList && !bookFlight" >
   <form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
   <div class = "row">
 
@@ -75,7 +75,7 @@
     <div class = "row">
       <span class = "col-md-10"></span>
       <span class = "col-md-2">
-       <input class = "btn btn-info" type = "submit" value = "Search Flight">
+       <input class = "btn btn-info" type = "submit" value = "Search Flight" [disabled]="searchflightForm.invalid">
       </span>
   </div>
 
@@ -86,7 +86,11 @@
     </div>
   <div class="col-md-12">
   <app-displayflightdetails [flightSelection]= 'flightList' [classSelected] = 'psgClass' [passengerCount] = 'seatsBus'
-                            (flightSelected)='onReceipt($event)' *ngIf="isOn"></app-displayflightdetails>
+                            (flightSelected)='onReceipt($event)' *ngIf="displayFlightList"></app-displayflightdetails>
+
+    <app-bookinginfo [flightSelected]= 'selectedFlight' [classSelected] = 'psgClass' [passengerCount] = 'seatsBus'
+                              (flightBooked)='onReturn($event)' *ngIf="bookFlight"></app-bookinginfo>
+
 
   </div>
   </div>
