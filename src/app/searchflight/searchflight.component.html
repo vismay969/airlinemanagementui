@@ -1,9 +1,8 @@
-<div class = "container">
-  <div class = "row">
-    <div class = "col-md-12" *ngIf="!displayFlightList && !bookFlight" >
-  <form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
-  <div class = "row">
 
+  <div class = "row">
+    <div class = "col-md-6" *ngIf="!displayFlightList && !bookFlight" >
+  <form [formGroup]="searchflightForm" (ngSubmit)="onSubmit()">
+  <div>
   <ng-container *ngFor="let eachConfig of formConfig1">
       <div class = {{eachConfig.text}}>
       <div class = "form-group">
@@ -14,7 +13,7 @@
                 [value]='eachAirport.location_abbr'>{{eachAirport.location_abbr}}</option>
       </select>
       </div>
-      <span
+      <span class = "error"
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
@@ -22,7 +21,7 @@
   </ng-container>
   </div>
 
-  <div class = "row">
+  <div>
   <ng-container *ngFor="let eachConfig of formConfig2">
     <div class = {{eachConfig.text}}>
       <label>{{eachConfig.label}}</label>
@@ -30,7 +29,7 @@
              formControlName={{eachConfig.name}}
              class="form-control">
 
-      <span
+      <span class = "error"
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
@@ -39,7 +38,7 @@
   </ng-container>
   </div>
 
-  <div class = "row">
+  <div>
   <ng-container *ngFor="let eachConfig of formConfig3">
     <div class = {{eachConfig.text}}>
       <label>{{eachConfig.label}}</label>
@@ -49,14 +48,12 @@
                 [value]='eachFlightClass'>{{eachFlightClass}}</option>
       </select>
 
-      <span
+      <span class = "error"
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
     </div>
   </ng-container>
-
-
   <ng-container *ngFor="let eachConfig of formConfig4">
     <div class = {{eachConfig.text}}>
       <label>{{eachConfig.label}}</label>
@@ -65,26 +62,33 @@
         <option *ngFor="let eachCount of PassengerCount"
                 [value]='eachCount'>{{eachCount}}</option>
       </select>
-      <span
+      <span class = "error"
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
     </div>
   </ng-container>
   </div>
-
-    <div class = "row">
-      <span class = "col-md-10"></span>
-      <span class = "col-md-2">
-       <input class = "btn btn-info" type = "submit" value = "Search Flight" [disabled]="searchflightForm.invalid">
-      </span>
+  </form>
+    </div>
+    <div class = "col-md-6"></div>
   </div>
 
-
-
-
-</form>
+    <div class = "row">
+      <div class = "col-md-6">
+        <div class = "rightbox"></div>
+<!--        <div class = "leftbox"></div>-->
+<!--        <div class = "leftbox"></div>-->
+<!--        <div class = "leftbox"></div>-->
+      <div class = "rightbox">
+       <input class = "btn btn-success" type = "submit" value = "Search Flight" [disabled]="searchflightForm.invalid">
+      </div>
+      </div>
+      <div class = "col-md-6">
+      </div>
     </div>
+
+
   <div class="col-md-12">
   <app-displayflightdetails [flightSelection]= 'flightList' [classSelected] = 'psgClass' [passengerCount] = 'seatsBus'
                             (flightSelected)='onReceipt($event)' *ngIf="displayFlightList"></app-displayflightdetails>
@@ -94,5 +98,4 @@
 
 
   </div>
-  </div>
-</div>
+

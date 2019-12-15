@@ -27,7 +27,7 @@ export class SearchflightComponent implements OnInit {
   {name: 'dept_abbr', type: 'text', label: 'Departure Airport', text : 'leftbox',
     errorMsg: 'Departure Airport Required',
     constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
-  {name: 'arr_abbr', type: 'text', label: 'Arrival Airport', text : 'rightbox',
+  {name: 'arr_abbr', type: 'text', label: 'Arrival Airport', text : 'leftbox',
     errorMsg: 'Arrival Airport Required',
     constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
   ];
@@ -42,7 +42,7 @@ export class SearchflightComponent implements OnInit {
       constraint: [Validators.required, Validators.minLength(1), Validators.maxLength(10)] },
   ];
   formConfig4: any[] = [
-    {name: 'noofseats', type: 'number', label: 'No. of Seats', text : 'rightbox',
+    {name: 'noofseats', type: 'number', label: 'No. of Seats', text : 'leftbox',
       errorMsg: 'No. of Seats Required',
       constraint: [Validators.required, Validators.max(5), Validators.min(1)] },
   ];

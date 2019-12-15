@@ -1,21 +1,36 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 
-
 .leftbox {
   float:left;
-  width:45%;
-  margin-top: 20px;
-  margin-left: 10px;
+  /*width:16%;*/
+  margin-top: 15px;
+  margin-left: 3%;
   /*background-color: white;*/
   height:100px;
+  width: 200px;
 }
 .rightbox {
-  float:right;
-  width:45%;
+  float:left;
+  /*width:16%;*/
   margin-top: 20px;
-  margin-left: 25px;
+  margin-left: 10%;
   /*background-color: white;*/
-  height:100px;
+  /*height:60px;*/
+  /*width: 200px;*/
+  width: 200px;
+
+}
+
+.error {
+  margin-top: 5px;
+  margin-left: 3%;
+  font-style: italic;
+  /*border: 2px red solid;*/
+  background: hotpink;
+
+  /*background-color: white;*/
+  /*height:60px;*/
+  /*width: 200px;*/
 }
 
