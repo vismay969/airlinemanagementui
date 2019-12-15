@@ -11,7 +11,7 @@
       </select>
     </div>
   </ng-container>
-
+<!--
   <ng-container *ngFor="let eachConfig of dataconfig1">
     <div class="col-md-5">
       <label>{{eachConfig.label}}</label>
@@ -21,7 +21,7 @@
                 [value]='eachAirport'>{{eachAirport.location}}</option>
       </select>
     </div>
-  </ng-container>
+  </ng-container>-->
 
   <!--      <span-->
   <!--        *ngIf="adminsearchscheduleForm.get(eachConfig.name).hasError('required')-->
@@ -35,12 +35,20 @@
 
   <ng-container *ngFor="let eachConfig of dataconfig2">
     <div class="col-md-5">
-      <label>{{eachConfig.label}}</label>
-      <div class="fa fa-calendar col-md-5" aria-hidden="true">
-        <input type="{{eachConfig.type}}" formControlName="{{eachConfig.name}}">
+    <label>{{eachConfig.label}}</label>
+    <div class="fa fa-calendar col-md-5" aria-hidden="true">
+      <input type="{{eachConfig.type}}" formControlName="{{eachConfig.name}}">
 
-      </div>
+    </div>
       <input type="submit" value="Search Flight">
+    </div>
+    <div class="col-md-12">
+
+      <app-displayflightschedule [flightSelection]= 'flightList'
+                                (flightSelected)='onReceipt($event)' *ngIf="displayFlightList"></app-displayflightschedule>
+     <!-- <app-editflightschedule [flightSelected]= 'selectedFlight'
+                       (flightEdited)='onReturn($event)' *ngIf="editFlight"></app-editflightschedule>
+-->
     </div>
   </ng-container>
 
