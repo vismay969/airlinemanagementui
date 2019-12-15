@@ -1,0 +1,48 @@
+<form [formGroup]="adminsearchscheduleForm" (ngSubmit)="onSubmit()">
+  <ng-container *ngFor="let eachConfig of dataconfig">
+
+    <div class = "col-md-12" class = {{eachConfig.text}}>
+      <label>{{eachConfig.label}}</label>
+      <select formControlName= {{eachConfig.name}}
+              class="form-control" >
+        <option *ngFor="let eachAirport of airportList"
+                [value]='eachAirport'>{{eachAirport.location_abbr}}
+        </option>
+      </select>
+    </div>
+  </ng-container>
+
+  <ng-container *ngFor="let eachConfig of dataconfig1">
+    <div class="col-md-5">
+      <label>{{eachConfig.label}}</label>
+      <select formControlName={{eachConfig.name}}
+              class="form-control">
+        <option *ngFor="let eachAirport of airportList"
+                [value]='eachAirport'>{{eachAirport.location}}</option>
+      </select>
+    </div>
+  </ng-container>
+
+  <!--      <span-->
+  <!--        *ngIf="adminsearchscheduleForm.get(eachConfig.name).hasError('required')-->
+  <!--              && adminsearchscheduleForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}-->
+  <!--      </span>-->
+  <!--      <span-->
+  <!--        *ngIf="adminsearchscheduleForm.get(eachConfig.name).hasError('maxlength')-->
+  <!--        && adminsearchscheduleForm.get(eachConfig.name).touched">{{" 'max length error' "}}-->
+  <!--      </span>-->
+
+
+  <ng-container *ngFor="let eachConfig of dataconfig2">
+    <div class="col-md-5">
+      <label>{{eachConfig.label}}</label>
+      <div class="fa fa-calendar col-md-5" aria-hidden="true">
+        <input type="{{eachConfig.type}}" formControlName="{{eachConfig.name}}">
+
+      </div>
+      <input type="submit" value="Search Flight">
+    </div>
+  </ng-container>
+
+
+</form>

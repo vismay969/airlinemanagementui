@@ -13,6 +13,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { LoginComponent } from './login/login.component';
 import { DisplayflightdetailsComponent } from './displayflightdetails/displayflightdetails.component';
 import { BookinginfoComponent } from './bookinginfo/bookinginfo.component';
+import { FlightticketComponent } from './flightticket/flightticket.component';
+import { RegisteruserComponent } from './registeruser/registeruser.component';
+import { SearchschedulesComponent } from './searchschedules/searchschedules.component';
+import { BookinghistoryComponent } from './bookinghistory/bookinghistory.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -37,6 +41,10 @@ const routes: Routes = [
     LoginComponent,
     DisplayflightdetailsComponent,
     BookinginfoComponent,
+    FlightticketComponent,
+    RegisteruserComponent,
+    SearchschedulesComponent,
+    BookinghistoryComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,

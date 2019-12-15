@@ -24,9 +24,10 @@ export class DisplayflightdetailsComponent implements OnInit {
 
 
   onBook(obj) {
+    console.log(obj);
 
-    this.flightSelected = obj;
     this.flightSelected.emit(obj);
+    console.log(this.flightSelected);
   }
 
 

@@ -1,0 +1,28 @@
+
+<div class="container">
+  <div class="row">
+    <div class="form_bg">
+      <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+        <h2 class="text-center">Registration page</h2>
+        <br/>
+        <div class="form-group">
+          <input type="email" class="form-control" id = "userName" placeholder="Email" name="userName" email required  [(ngModel)]="registerDetails.userName">
+          <!--          <span class="help-bpx" *ngIf="email.touched && !email.valid ">Please enter the Email Value</span>-->
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control"  placeholder="Password" name="password" required  [(ngModel)]="registerDetails.password">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="mobileNo" placeholder="MobileNo" name="mobileNo" required  [(ngModel)]="registerDetails.mobileNo">
+        </div>
+        <div class="form-group">
+        </div>
+        <br/>
+        <div class="align-center">
+          <button type="submit" class="btn btn-default" id="register" [disabled]="!form.valid" >Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--{{form.value|json}}-->

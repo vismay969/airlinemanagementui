@@ -1,1 +1,28 @@
 <p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div>
+    <p>{{loginStatus}}</p>
+  </div>
+  <ng-container *ngFor="let eachConfig of formConfig">
+    <div class="form-group">
+      <label>{{eachConfig.label}}</label>
+      <input type={{eachConfig.type}} name={{eachConfig.name}}
+             formControlName={{eachConfig.name}} class="form-control" />
+      <span *ngIf="loginForm.get(eachConfig.name).hasError('required')
+  && loginForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}</span>
+    </div>
+  </ng-container>
+  <div>
+    <!--
+        <input type="submit" class="btn btn-info" value="Login" [disabled]="loginForm.invalid"/>
+    -->
+    <button>Login</button>
+  </div>
+  <div>
+  </div>
+</form>
+
+{{this.loginStatus}}
+{{this.serviceCallError}}
+{{this.invalidUser}}
+

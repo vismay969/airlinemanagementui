@@ -1,57 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BookingInfo} from '../bookinginfo';
 import {UserService} from '../user.service' ;
 import {Router} from '@angular/router';
+import {FlightList} from '../flightlist';
+import {HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-bookinginfo',
   templateUrl: './bookinginfo.component.html',
   styleUrls: ['./bookinginfo.component.css']
 })
+
 export class BookinginfoComponent implements OnInit {
-  bookingInfo: BookingInfo;
-  userId = 1;
-  flightSchNo = 16 ;
-  fare = 1000;
+  @Input() flightSelected: FlightList;
+  @Input() classSelected: string;
+  @Input() passengerCount: number;
+  @Output() flightBooked: EventEmitter<BookingInfo> =
+    new EventEmitter<BookingInfo>();
+  bookingInfo: BookingInfo = new class implements BookingInfo {
+    booking_id: number;
+    flightDate: string;
+    cust_email: string;
+    noOfPass: number;
+    class_type: string;
+    total_fare: number;
+    total_seats: number;
+    credit_card_info: string;
+    status_flag: string;
+
+  };
+  serviceCallError: HttpHeaders;
+
 
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit() {
-//        get data from parent
-    this.bookingInfo.booking_id = 0;     // zero for sequence
-    this.bookingInfo.flight_date = new Date(2019, 12, 13);   // received as input
-    this.bookingInfo.noOfPass = 5;   // received as input
-    this.bookingInfo.class_type = 'B';   // received as input
-    this.bookingInfo.total_seats = 0;   // dupe
-    this.bookingInfo.status_flag = 'N';    // Default value;
-
-    console.log('in oninit -------------------------- '  );
-    console.log(this.bookingInfo);
-
+    this.bookingInfo.cust_email = '';
+    this.bookingInfo.credit_card_info = '';
   }
 
-  onSubmit(values) {
-    console.log( values);
 
-    this.bookingInfo = values;
-    console.log(this.bookingInfo);
-
+  onSubmit(value) {
+    console.log( value);
     this.bookingInfo.booking_id = 0;     // zero for sequence
-    this.bookingInfo.flight_date = new Date(2019, 12, 13);   // received as input
-    this.bookingInfo.noOfPass = 5;   // received as input
+    this.bookingInfo.flightDate = this.flightSelected.dept_date;  // received as input
+    this.bookingInfo.noOfPass = this.passengerCount;   // received as input
     this.bookingInfo.class_type = 'B';   // received as input
-    this.bookingInfo.total_seats = 0;   // dupe
+    this.bookingInfo.total_fare = this.passengerCount * this.flightSelected.fare_business;
+    this.bookingInfo.total_seats = this.passengerCount;   // dupe
     this.bookingInfo.status_flag = 'N';    // Default value;
-    console.log('intialise values ------------------------')
-
-    this.bookingInfo.total_fare = this.bookingInfo.noOfPass * this.fare;
-
-    console.log('fare added ' );
     console.log(this.bookingInfo);
-    this.service.addBookingEntry(this.bookingInfo).subscribe(data => console.log(data));
+    // this.service.addBookingEntry(this.bookingInfo).subscribe(data => console.log(data));
+    this.service.addBookingEntry(this.bookingInfo)
+      .subscribe( data => {
+        console.log(data);
+        this.flightBooked.emit(data);
+        } ,
+      (err) => {  this.captureError(err);
+      }  );
+  }
 
+  captureError(error) {
+    this.serviceCallError = error.error.message;
+    console.log(' in captureError func  ---------------------------- ');
+    console.log(this.serviceCallError);
+  }
 
-
+onCancel() {
+    console.log('Cancelled');
+    this.flightBooked.emit(null);
+    // this.router.navigate(['/home']);
   }
 }
 
