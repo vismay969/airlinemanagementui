@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Userdetail} from '../userdetail';
+import {UserDetails} from '../userdetail';
 import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../user.service';
@@ -11,7 +11,8 @@ import {UserService} from '../user.service';
 })
 export class RegisteruserComponent implements OnInit {
 
-  registerDetails: Userdetail = new class implements Userdetail {
+  registerDetails: UserDetails = new class implements UserDetails {
+    userId: number;
     userName: string;
     password: string;
     mobileNo: string;

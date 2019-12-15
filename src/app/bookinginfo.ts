@@ -8,7 +8,7 @@ export interface BookingInfo {
   total_fare: number;
   total_seats: number;
   credit_card_info: string;
-  status_flag: string;
+  statusFlag: string;
 
 }
 

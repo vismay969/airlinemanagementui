@@ -17,18 +17,23 @@ import { FlightticketComponent } from './flightticket/flightticket.component';
 import { RegisteruserComponent } from './registeruser/registeruser.component';
 import { SearchschedulesComponent } from './searchschedules/searchschedules.component';
 import { BookinghistoryComponent } from './bookinghistory/bookinghistory.component';
+import { LogoutComponent } from './logout/logout.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { DisplayflightscheduleComponent } from './displayflightschedule/displayflightschedule.component';
+import { EditflightscheduleComponent } from './editflightschedule/editflightschedule.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: SearchflightComponent},
+  {path: 'info', component: AboutusComponent},
+  {path: 'history', component: BookinghistoryComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'list', component: DisplayflightdetailsComponent},
-
-  // {path: 'logout', component: LogoutComponent},
+  {path: 'logout', component: LogoutComponent},
+  {path: 'schedule', component: SearchschedulesComponent},
+  {path: '**', redirectTo: 'home'}
   // {path: 'addcustomer', component: AddloancustomerComponent},
   // {path: 'showcustomer', component: ShowcustomerComponent},
   // {path: 'passenger', component: ShowpassengerComponent},
-  {path: '**', redirectTo: 'home'}
 
 ];
 @NgModule({
@@ -45,6 +50,10 @@ const routes: Routes = [
     RegisteruserComponent,
     SearchschedulesComponent,
     BookinghistoryComponent,
+    LogoutComponent,
+    AboutusComponent,
+    DisplayflightscheduleComponent,
+    EditflightscheduleComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,

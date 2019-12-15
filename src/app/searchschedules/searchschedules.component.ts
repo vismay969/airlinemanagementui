@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../user.service';
 import {AirportMaster} from '../airportmaster';
+import {FlightList} from '../flightlist';
 
 
 @Component({
@@ -12,8 +13,11 @@ import {AirportMaster} from '../airportmaster';
 })
 export class SearchschedulesComponent implements OnInit {
 
+  flightList: FlightList[];
   airportList: AirportMaster[];
-
+  selectedFlight: FlightList;
+  seatsFirst = 0;
+  seatsBus = 0;
   adminsearchscheduleForm: FormGroup;
   dataconfig: any[] = [
     {name: 'dept_abbr', type: 'text', label: 'Departure Airport',
@@ -24,13 +28,13 @@ export class SearchschedulesComponent implements OnInit {
       constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
   ];
 
-  dataconfig1: any[] = [
+/*  dataconfig1: any[] = [
     {
       name: 'airline', type: 'text', label: 'Airline',
       errorMsg: 'Please select the airline to search',
       constraint: [Validators.required]
     },
-  ];
+  ];*/
 
   dataconfig2: any[] = [
     {
@@ -39,6 +43,8 @@ export class SearchschedulesComponent implements OnInit {
       constraint: Validators.required
     },
   ];
+   displayFlightList = false;
+   editFlight =  false;
 
   constructor(private fb: FormBuilder, private router: Router, private service: UserService) {
   }
@@ -54,10 +60,10 @@ export class SearchschedulesComponent implements OnInit {
       group.addControl(eachConfig.name, new FormControl(
         '', {validators: eachConfig.constraint}));
     });
-    this.dataconfig1.forEach(eachConfig => {
+    /*this.dataconfig1.forEach(eachConfig => {
       group.addControl(eachConfig.name, new FormControl(
         '', {validators: eachConfig.constraint}));
-    });
+    });*/
 
     this.dataconfig2.forEach(eachConfig => {
       group.addControl(eachConfig.name, new FormControl(
@@ -67,14 +73,33 @@ export class SearchschedulesComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.adminsearchscheduleForm.value);
-    console.log(this.adminsearchscheduleForm.get('dept_abbr').value);
-    console.log(this.adminsearchscheduleForm.get('arr_abbr').value);
-    console.log(this.adminsearchscheduleForm.get('dept_date').value);
-    // const noofseats = this.adminsearchscheduleForm.get('airline').value;
 
+    const depAbbr = this.adminsearchscheduleForm.get('dept_abbr').value;
+    const arrAbbr = this.adminsearchscheduleForm.get('arr_abbr').value;
+    const depDate = this.adminsearchscheduleForm.get('dept_date').value;
+
+      // this.router.navigate(['/showcustomer']);
+    this.service.searchUserFlights(this.seatsBus, this.seatsFirst, depAbbr, arrAbbr, depDate)
+        .subscribe(data => {
+          this.flightList = data;
+          this.displayFlightList = true;
+        });
+
+    console.log(this.flightList);
+    }
+
+  onReceipt(val) {
+    console.log(val);
+    this.selectedFlight = val;
+    this.displayFlightList = false;
+    this.editFlight = true;
   }
 
+  onReturn(val) {
+    console.log(val);
+    this.displayFlightList = false;
+    this.editFlight = false;
+    this.adminsearchscheduleForm.reset();
+
+  }
 }
-
-

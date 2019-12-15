@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Navlink} from '../navlink';
 import {UserService} from '../user.service';
+import {CompinteractionService} from '../compinteraction.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,31 +9,46 @@ import {UserService} from '../user.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  // links: string[] = ['Home', 'Book', 'Blog', 'Search'];
   showLogin = 'inline';
   showLogout = 'none';
+  visitor = true;
 
-  links: Navlink[] = [
-    // {link: 'login', text: 'Login'},
+  userlinks: Navlink[] = [
     {link: 'home', text: 'Home'},
-    {link: 'list', text: 'About Us'},
-    {link: 'userhistory', text: 'My Booking'},
-    {link: 'userflight', text: 'Book Flight'}];
+    {link: 'info', text: 'About Us'},
+    {link: 'bookflight', text: 'Book Flight'},
+    {link: 'history', text: 'My Booking'}
+  ];
 
-  constructor(private service: UserService) { }
+  adminlinks: Navlink[] = [
+    {link: 'home', text: 'Home'},
+    {link: 'info', text: 'About Us'},
+    {link: 'schedule', text: 'Search Flight Schedule'}
+  ];
+
+
+  constructor(private service: CompinteractionService) { }
 
   ngOnInit() {
-    // this.service.loginStatus.subscribe(resp => {
-    //   console.log(resp);
-    //   if (resp === 'logged') {
+    this.service.loginStatus.subscribe(resp => {
+      console.log(resp);
+      if (resp === 'logged') {
         this.showLogin = 'none';
         this.showLogout = 'inline';
-    //   } else {
-    //     this.showLogin = 'inline';
-    //     this.showLogout = 'none';
-    //   }
-    // });
-  }
+      } else {
+        this.showLogin = 'inline';
+        this.showLogout = 'none';
+      }
+      const role = sessionStorage.getItem('role');
+      console.log(role);
+      if (role === 'A') {
+        this.visitor = false;
+      } else {
+        this.visitor = true;
+      }
+    });
+
+    }
 
 }
 

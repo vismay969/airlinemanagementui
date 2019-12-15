@@ -14,8 +14,9 @@
     <th>Flight AirLine</th>
     <th>Departure Time</th>
     <th>Arrival Time</th>
-    <th>Fare</th>
-<!--    <th>Price</th>-->
+    <th>Business Class Fare</th>
+    <th>First Class Fare</th>
+    <!--    <th>Price</th>-->
   </tr>
   </thead>
   <tbody>
@@ -23,10 +24,12 @@
   : srchString-->
   <tr *ngFor="let eachflight of flightSelection | paginate:{ itemsPerPage: 5,currentPage: page}">
     <td>{{eachflight.airline}}</td>
-    <td>{{eachflight.dept_time | date: 'medium'}}</td>
-    <td>{{eachflight.arr_time | date: 'medium'}}</td>
+    <td>{{eachflight.dept_time }}</td>
+    <td>{{eachflight.arr_time }}</td>
     <td>{{eachflight.fare_business | currency: 'INR'}}</td>
-    <button (click)="onBook(eachflight)" class="btn btn-info fa fa-plane"> Book</button>
+    <td>{{eachflight.fare_first | currency: 'INR'}}</td>
+    <!--    <td>{{eachflight.fare | currency: 'INR'}} </td>-->
+    <button (click)="onEdit(eachflight)" class="btn btn-info fa fa-edit"> Book</button>
   </tr>
   </tbody>
 </table>

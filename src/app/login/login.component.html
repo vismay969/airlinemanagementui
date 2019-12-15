@@ -1,4 +1,4 @@
-<p>login works!</p>
+
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div>
     <p>{{loginStatus}}</p>
@@ -12,17 +12,27 @@
   && loginForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}</span>
     </div>
   </ng-container>
-  <div>
-    <!--
-        <input type="submit" class="btn btn-info" value="Login" [disabled]="loginForm.invalid"/>
-    -->
-    <button>Login</button>
+
+  <div class = "container-fluid">
+  <div class = "row">
+    <span class = "col-md-10"></span>
+    <span class = "col-md-2">
+       <input class = "btn btn-info" type = "submit" value = "Login" [disabled]="loginForm.invalid">
+      </span>
   </div>
-  <div>
   </div>
+
+<div class = "container-fluid">
+  <div class = "row">
+    <span class = "col-md-3"></span>
+    <div class = "col-md-6">
+      <div [hidden]="!invalidUser" class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Warning ! </strong>{{this.serviceCallError}}
+      </div>
+    </div>
+    <span class = "col-md-3"></span>
+  </div>
+</div>
+
 </form>
-
-{{this.loginStatus}}
-{{this.serviceCallError}}
-{{this.invalidUser}}
-

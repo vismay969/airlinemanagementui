@@ -26,10 +26,10 @@ export class BookinginfoComponent implements OnInit {
     total_fare: number;
     total_seats: number;
     credit_card_info: string;
-    status_flag: string;
-
+    statusFlag: string;
   };
   serviceCallError: HttpHeaders;
+  userId: number;
 
 
   constructor(private service: UserService, private router: Router) { }
@@ -48,10 +48,10 @@ export class BookinginfoComponent implements OnInit {
     this.bookingInfo.class_type = 'B';   // received as input
     this.bookingInfo.total_fare = this.passengerCount * this.flightSelected.fare_business;
     this.bookingInfo.total_seats = this.passengerCount;   // dupe
-    this.bookingInfo.status_flag = 'N';    // Default value;
+    this.bookingInfo.statusFlag = 'N';    // Default value;
     console.log(this.bookingInfo);
     // this.service.addBookingEntry(this.bookingInfo).subscribe(data => console.log(data));
-    this.service.addBookingEntry(this.bookingInfo)
+    this.service.addBookingEntry(this.bookingInfo, this.userId, this.flightSelected.flight_sch_No)
       .subscribe( data => {
         console.log(data);
         this.flightBooked.emit(data);

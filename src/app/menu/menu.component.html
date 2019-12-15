@@ -1,12 +1,29 @@
+
+<div [hidden]="!visitor">
 <ul>
-  <li *ngFor = "let eachLink of links">
+  <li *ngFor = "let eachLink of userlinks">
     <!--    <a href = "{{eachLink}}">{{eachLink}}</a>-->
     <a [routerLink]="[eachLink.link]">{{eachLink.text}}</a>
 
   </li>
   <li><a [routerLink]="['/login']" [ngStyle]="{display: showLogin}">Login</a> </li>
-  <li><a [routerLink]="['logout']" [ngStyle]="{display: showLogout}">Logout</a> </li>
+  <li><a [routerLink]="['/logout']" [ngStyle]="{display: showLogout}">Logout</a> </li>
 
 </ul>
+</div>
+
+
+<div [hidden]="visitor">
+  <ul>
+    <li *ngFor = "let eachLink of adminlinks">
+      <!--    <a href = "{{eachLink}}">{{eachLink}}</a>-->
+      <a [routerLink]="[eachLink.link]">{{eachLink.text}}</a>
+
+    </li>
+    <li><a [routerLink]="['/login']" [ngStyle]="{display: showLogin}">Login</a> </li>
+    <li><a [routerLink]="['/logout']" [ngStyle]="{display: showLogout}">Logout</a> </li>
+
+  </ul>
+</div>
 
 

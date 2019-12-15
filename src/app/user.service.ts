@@ -24,9 +24,9 @@ export class UserService {
     (this.baseURL + '/flightMaster/' + seatsBus + '/' + seatsFirst + '/' + arrAbbr + '/' + depAbbr + '/' + depDate );
    }
 
-  addBookingEntry(bookingInfoData: BookingInfo): Observable<BookingInfo> {
-    console.log('in observable ' + bookingInfoData)
-    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + '1' + '/' + '15', bookingInfoData);
+  addBookingEntry(bookingInfoData: BookingInfo, userId: number, flightNo: number): Observable<BookingInfo> {
+    console.log('in observable ' + bookingInfoData);
+    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + 'userId' + 'flightNo' , bookingInfoData);
   }
 
   // add in user service
@@ -34,15 +34,20 @@ export class UserService {
     return this.client.get<BookingInfo[]>(this.baseURL + '/bookingInfo/' + userId);
   }
 
- /* addUser(user: Userdetails): Observable<Userdetails> {
-    return this.client.post<Userdetails>(this.baseURL + '/user' , user);
+  addUser(user: UserDetails): Observable<UserDetails> {
+    return this.client.post<UserDetails>(this.baseURL + '/user' , user);
 
-  }*/
+  }
 
   findByUserName(userName: string): Observable<UserDetails> {
     console.log('In FindByUserName ');
     console.log(userName);
     return this.client.get<UserDetails>(this.baseURL + '/user/' + userName);
+  }
+
+  cancelBookingEntry(bookingInfoData: BookingInfo): Observable<BookingInfo> {
+    console.log('in observable ' + bookingInfoData);
+    return this.client.put<BookingInfo>(this.baseURL + '/bookingInfo' , bookingInfoData);
   }
 
 }
