@@ -26,7 +26,7 @@ export class UserService {
 
   addBookingEntry(bookingInfoData: BookingInfo, userId: number, flightNo: number): Observable<BookingInfo> {
     console.log('in observable ' + bookingInfoData);
-    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + 'userId' + 'flightNo' , bookingInfoData);
+    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + 'userId' + '/' + 'flightNo' , bookingInfoData);
   }
 
   // add in user service
