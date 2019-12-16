@@ -19,7 +19,7 @@ export class RegisteruserComponent implements OnInit {
     role: string;
   };
 
-  constructor(private fb: FormBuilder, private route: Router ,  private service: UserService) { }
+  constructor(private fb: FormBuilder, private router: Router ,  private service: UserService) { }
 
 
   ngOnInit() {
@@ -30,8 +30,11 @@ export class RegisteruserComponent implements OnInit {
     this.registerDetails = values;
     this.registerDetails.role = 'U';
     console.log(this.registerDetails);
-    this.service.addUser(this.registerDetails).subscribe(data => this.registerDetails = data);
-  }
+    this.service.addUser(this.registerDetails).subscribe(data => {
+      this.registerDetails = data;
+      this.router.navigate(['/login']);
+  });
+      }
 
 }
 

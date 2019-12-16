@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   userDetails: UserDetails;
   loginForm: FormGroup;
   selectedFlight: FlightList;
+  inputFlight: any;
   loginStatus = '';
   invalidUser: boolean;
   serviceCallError: string;
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit {
   username = '';
   password = '';
   role = '';
+  loggedUserId: number;
+  loggedUser: string;
 
 //   enum ChangeDetectionStrategy {
 //   OnPush: 0
@@ -49,7 +52,14 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.createForm();
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
     console.log(this.returnUrl);
-    // this.selectedFlight
+    // console.log(this.route.snapshot.queryParams.returnUrl);
+    console.log(this.route.snapshot.paramMap.get('selectedFlight'));
+    this.route.params.subscribe(params => {
+      console.log(params);
+      this.inputFlight = params;
+      this.selectedFlight = this.inputFlight;
+    });
+    console.log(this.selectedFlight);
   }
 
 
@@ -70,6 +80,8 @@ export class LoginComponent implements OnInit {
     console.log('Data role : ' + data.role);
     console.log(this.invalidUser);
     this.role = data.role;
+    this.loggedUser = data.userName;
+    this.loggedUserId = data.userId;
     this.loginForm.reset();
     if (this.username === data.userName && this.password === data.password) {
       this.invalidUser = false;
@@ -77,8 +89,17 @@ export class LoginComponent implements OnInit {
       console.log('Status:' + this.loginStatus);
       sessionStorage.setItem('userLogged', 'yes');
       sessionStorage.setItem('role', this.role);
+      sessionStorage.setItem('loggedUser', this.loggedUser);
+      sessionStorage.setItem('loggedUserId', String(this.loggedUserId));
       this.sessionService.changeLoginStatus('logged');
-      this.router.navigateByUrl(this.returnUrl);
+      console.log(this.returnUrl);
+      if (this.returnUrl === '/') {
+        this.router.navigateByUrl('/home');
+      } else {
+        // this.router.navigate(['/home', this.selectedFlight]);
+        this.router.navigate([this.returnUrl[0], this.selectedFlight]);
+      }
+      // this.router.navigateByUrl(this.returnUrl);
     } else {
       this.invalidUser = true;
       this.loginStatus = 'Invalid user';
@@ -104,5 +125,8 @@ export class LoginComponent implements OnInit {
     this.invalidUser = true;
     // this.form.reset();
 
+  }
+  onRegister() {
+    this.router.navigate(['/register']);
   }
 }

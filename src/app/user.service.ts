@@ -24,13 +24,13 @@ export class UserService {
     (this.baseURL + '/flightMaster/' + seatsBus + '/' + seatsFirst + '/' + arrAbbr + '/' + depAbbr + '/' + depDate );
    }
 
-  addBookingEntry(bookingInfoData: BookingInfo, userId: number, flightNo: number): Observable<BookingInfo> {
+  addBookingEntry(bookingInfoData: BookingInfo, userId: string, flightNo: number): Observable<BookingInfo> {
     console.log('in observable ' + bookingInfoData);
-    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + 'userId' + '/' + 'flightNo' , bookingInfoData);
+    return this.client.post<BookingInfo>(this.baseURL + '/bookingInfo/' + userId + '/' + flightNo , bookingInfoData);
   }
 
   // add in user service
-  findAllBookingInfobyUserId(userId: number): Observable<BookingInfo[]> {
+  findAllBookingInfobyUserId(userId: string): Observable<BookingInfo[]> {
     return this.client.get<BookingInfo[]>(this.baseURL + '/bookingInfo/' + userId);
   }
 

@@ -25,12 +25,16 @@ import { EditflightscheduleComponent } from './editflightschedule/editflightsche
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: SearchflightComponent},
+  {path: 'home/:selectedFlight', component: SearchflightComponent},
   {path: 'info', component: AboutusComponent},
   {path: 'history', component: BookinghistoryComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'login', component: RegisteruserComponent},
+  {path: 'login/:selectedFlight', component: LoginComponent},
+  {path: 'register', component: RegisteruserComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'schedule', component: SearchschedulesComponent},
+  {path: 'flightticket', component: FlightticketComponent},
+  {path: 'flightticket/:selectedTicket', component: FlightticketComponent},
   {path: '**', redirectTo: 'home'}
   // {path: 'addcustomer', component: AddloancustomerComponent},
   // {path: 'showcustomer', component: ShowcustomerComponent},
