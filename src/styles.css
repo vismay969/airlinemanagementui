@@ -173,7 +173,7 @@ body {
   border: 0;
   font: 13px Arial, Helvetica, sans-serif;
   color: #3a3a3a;
-  line-height: 20px;
+  line-height: 30px;
   min-width: 980px;
   padding: 10px 0
 }
@@ -205,6 +205,7 @@ body {
 .main {
   margin: 0 auto;
   width: 960px;
+  height: 730px;
   padding: 10px;
   background: #fff;
   box-shadow: 0 0 7px rgba(0, 0, 0, .2);
@@ -378,15 +379,16 @@ header {
 /* content */
 #content {
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   padding-bottom: 14px
 }
 
 .for_banners {
   background: url(/assets/images/bg_top_img.jpg) 0 0 no-repeat;
+  background-size: cover;
   width: 100%;
-  height: 342px;
-  padding-top: 30px
+  height: 480px;
+  padding-top: 20px
 }
 
 .pad1 {
@@ -730,8 +732,8 @@ header {
 
 /* footer */
 footer {
-  padding: 20px 0 37px 70px;
-  height: 50px;
+  padding: 5px 0 37px 70px;
+  height: 20px;
   background: url(/assets/images/bg_footer.gif) top repeat-x #d7dce6;
   font-size: 12px;
   color: #3a3a3a

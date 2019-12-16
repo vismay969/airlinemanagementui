@@ -13,8 +13,8 @@
   "Delete Successful"
 </ng-template>
 
-<table class="table table-striped">
-  <tr>
+<table class="table table-dark table-striped">
+  <thead class="thead-dark">
 <!--    <th>From</th>-->
 <!--    <th>To</th>-->
 <!--    <th>Airline</th>-->
@@ -24,7 +24,7 @@
     <th>Passenger Count</th>
     <th>Total Fare</th>
 
-  </tr>
+  </thead>
   <tr *ngFor="let eachBooking of bookingList  | paginate : {itemsPerPage:4,currentPage:p}" >
 
     <td>{{eachBooking.flightDate| date}}</td>
