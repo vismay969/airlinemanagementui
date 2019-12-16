@@ -21,6 +21,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { DisplayflightscheduleComponent } from './displayflightschedule/displayflightschedule.component';
 import { EditflightscheduleComponent } from './editflightschedule/editflightschedule.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -58,7 +59,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
-    ReactiveFormsModule, RouterModule.forRoot(routes), NgxPaginationModule
+    ReactiveFormsModule, RouterModule.forRoot(routes), NgxPaginationModule, ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

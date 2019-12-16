@@ -33,15 +33,32 @@
     <td>{{eachBooking.noOfPass}}</td>
     <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
     <td>
-      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))" (click)="cancelBookingEntry(eachBooking)"
+      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))"
+              (click)="cancelBookingEntry(eachBooking,template)"
               class="btn btn-danger fa fa-remove">Cancel
       </button>
+      <ng-template #template>
+        <div class="modal-body text-center">
+          <p>Do you want to confirm?</p>
+          <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+          <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+      </ng-template>
+
     </td>
     <td><label *ngIf="((now | date) >= (eachBooking.flightDate | date))"
                class="btn btn-info fa fa-plane">Departed</label></td>
     <td><label *ngIf="('Y' === (eachBooking.statusFlag))" class="btn btn-info fa fa-remove">Cancelled</label></td>
-
-
   </tr>
 </table>
 <pagination-controls (pageChange) = "p=$event"></pagination-controls>
+
+
+<!--<button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button>-->
+<!--<ng-template #template>-->
+<!--  <div class="modal-body text-center">-->
+<!--    <p>Do you want to confirm?</p>-->
+<!--    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>-->
+<!--    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>-->
+<!--  </div>-->
+<!--</ng-template>-->
