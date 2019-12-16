@@ -56,17 +56,16 @@ export class BookinghistoryComponent implements OnInit {
   //   this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   // }
 
-  confirm(obj): void {
+  confirm(): void {
     this.message = 'Confirmed!';
-    console.log(this.message);
-    this.idxpos = this.bookingList.indexOf(obj);
-    this.bookingentry = obj;
+    console.log(this.bookingentry);
     this.service.cancelBookingEntry(this.bookingentry).subscribe(data => {
         this.updateSuccess = data;
         this.successFlag = true;
         this.service.findAllBookingInfobyUserId(this.userId).subscribe(newData => this.bookingList = newData);
       },
       (err) => {
+        console.log(err);
         this.captureError(err);
       });
     this.modalRef.hide();
@@ -78,6 +77,7 @@ export class BookinghistoryComponent implements OnInit {
   }
 
   cancelBookingEntry(obj, template: TemplateRef<any>) {
+    this.bookingentry = obj;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     //   this.idxpos = this.bookingList.indexOf(obj);
     //   this.bookingentry = obj;
