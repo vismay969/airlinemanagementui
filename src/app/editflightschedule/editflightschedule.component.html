@@ -1,1 +1,79 @@
-<p>editflightschedule works!</p>
+<form (ngSubmit)="onSubmit(frm.value)" #frm="ngForm">
+  <div class="container-fluid">
+    <div class="row">
+      <span class="col-md-2"></span>
+      <span class="col-md-8">
+      <div class="table-responsive">
+      <table class="table table-striped table-hover table-responsive-sm">
+      <thead>
+        <tr>
+          <th style="width: 20%"></th>
+          <th style="width: 25%"></th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr class="table-info">
+          <td>Airline</td>
+          <td>{{flightSelectedObj.airline}}</td>
+        </tr>
+
+        <tr class="table-info">
+          <td>Departure Airport</td>
+          <td>{{flightSelectedObj.dept_abbr}}</td>
+        </tr>
+        <tr class="table-info">
+          <td>Arrival Airport</td>
+          <td>{{flightSelectedObj.arr_abbr}}</td>
+        </tr>
+        <tr>
+          <td>Departure Date</td>
+          <td><input type="date" [(ngModel)]="flightSelectedObj.dept_date" name="dept_date" required="required"></td>
+        </tr>
+        <tr>
+          <td>Departure Time</td>
+          <td><input type="datetime-local" [(ngModel)]="flightSelectedObj.dept_time" name="dept_time" required="required"></td>
+        </tr>
+        <tr>
+          <td>Arrival Date</td>
+          <td><input type="date" [(ngModel)]="flightSelectedObj.arr_date" name="arr_date" required="required"></td>
+        </tr>
+        <tr>
+          <td>Arrival Time</td>
+          <td><input type="datetime-local" [(ngModel)]="flightSelectedObj.arr_time" name="arr_time" required="required"></td>
+        </tr>
+                <tr>
+          <td>Business Class Fare</td>
+          <td><input type="number" [(ngModel)]="flightSelectedObj.fare_business" name="fare_business" required="required"></td>
+        </tr>
+        <tr>
+          <td>First Class Fare</td>
+          <td><input type="number" [(ngModel)]="flightSelectedObj.fare_first" name="fare_first" required="required"></td>
+        </tr>
+
+</tbody>
+      </table>
+      </div>
+        </span>
+      <span class="col-md-2"></span>
+
+
+    </div>
+    <div class="row">
+      <span class="col-md-3"></span>
+      <span class="col-md-3">
+       <input class="btn btn-info" type="submit" value="Update Details">
+      </span>
+      <span class="col-md-3">
+        <button (click)="onCancel()" class="btn btn-warning" type="button">Cancel</button>
+      </span>
+      <span class="col-md-3"></span>
+
+    </div>
+
+  </div>
+</form>
+<!--
+{{frm.value|json}}
+-->
+{{this.serviceCallError}}
+
