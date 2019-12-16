@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../user.service';
 import {AirportMaster} from '../airportmaster';
 import {Observable} from 'rxjs';
@@ -16,6 +16,7 @@ import {BookingInfo} from '../bookinginfo';
 export class SearchflightComponent implements OnInit {
   flightList: FlightList[];
   selectedFlight: FlightList;
+  inputFlight: any;
   psgClass: string;
   seatsBus: number ;
   seatsFirst: number;
@@ -50,11 +51,21 @@ private loginStatus = 'invalid user';
 FlightClass = ['Business', 'First'];
 PassengerCount = [1, 2, 3, 4, 5, 6];
 
-constructor(private fb: FormBuilder, private router: Router, private service: UserService) { }
+constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) { }
 
 ngOnInit() {
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
+  this.route.params.subscribe(params => {
+    console.log(params);
+    this.inputFlight = params;
+    this.selectedFlight = this.inputFlight;
+  });
+  console.log(this.selectedFlight);
+  if (this.selectedFlight.flight_sch_No > 1) {
+    this.onReceipt(this.selectedFlight);
+  }
+  // console.log(this.selectedFlight);
 }
 
 createForm(): FormGroup {
@@ -96,10 +107,14 @@ onSubmit() {
     this.seatsFirst = 0;
   } else {
     this.seatsBus = 0;
-    this.seatsFirst = this.searchflightForm.get('dept_abbr').value;
+    this.seatsFirst = this.searchflightForm.get('noofseats').value;
   }
-  // this.router.navigate(['/showcustomer']);
-  this.service.searchUserFlights(this.seatsBus, this.seatsFirst, depAbbr, arrAbbr, depDate)
+  console.log(this.seatsBus);
+  console.log(this.seatsFirst);
+  console.log(arrAbbr);
+  console.log(depAbbr);
+  console.log(depDate);
+  this.service.searchUserFlights(this.seatsBus, this.seatsFirst, arrAbbr, depAbbr, depDate)
     .subscribe(data => {
       this.flightList = data;
       this.displayFlightList = true;
@@ -113,9 +128,9 @@ onSubmit() {
     const loggedStatus = sessionStorage.getItem('userLogged');
     console.log(loggedStatus);
     if (loggedStatus !== 'yes') {
-      this.router.navigate(['/login', this.selectedFlight], { queryParams: { returnUrl: ['/'] }});
-      this.displayFlightList = false;
-      this.bookFlight = true;
+        this.router.navigate(['/login', this.selectedFlight], { queryParams: { returnUrl: ['/home'] }});
+        this.displayFlightList = false;
+        this.bookFlight = true;
     } else {
       this.displayFlightList = false;
       this.bookFlight = true;
