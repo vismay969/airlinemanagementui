@@ -16,6 +16,7 @@ import {BookingInfo} from '../bookinginfo';
 export class SearchflightComponent implements OnInit {
   flightList: FlightList[];
   selectedFlight: FlightList;
+  selectedTicket: BookingInfo;
   inputFlight: any;
   psgClass: string;
   seatsBus: number ;
@@ -139,9 +140,12 @@ onSubmit() {
 
   onReturn(val) {
     console.log(val);
-    this.displayFlightList = false;
-    this.bookFlight = false;
-    this.searchflightForm.reset();
-
+    this.selectedTicket = val;
+    console.log(this.selectedTicket);
+    this.router.navigate(['/flightticket', this.selectedTicket]);
+    console.log('not routing');
+    // this.displayFlightList = false;
+    // this.bookFlight = false;
+    // this.searchflightForm.reset();
   }
 }
