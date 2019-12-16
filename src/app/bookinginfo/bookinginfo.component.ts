@@ -29,7 +29,7 @@ export class BookinginfoComponent implements OnInit {
     statusFlag: string;
   };
   serviceCallError: HttpHeaders;
-  userId: number;
+  userId: string;
 
 
   constructor(private service: UserService, private router: Router) { }
@@ -37,13 +37,14 @@ export class BookinginfoComponent implements OnInit {
   ngOnInit() {
     this.bookingInfo.cust_email = '';
     this.bookingInfo.credit_card_info = '';
+    this.userId = sessionStorage.getItem('loggedUserId');
   }
 
 
   onSubmit(value) {
     console.log( value);
     this.bookingInfo.booking_id = 0;     // zero for sequence
-    this.bookingInfo.flightDate = this.flightSelected.dept_date;  // received as input
+    this.bookingInfo.flightDate = this.flightSelected.dept_time;  // received as input
     this.bookingInfo.noOfPass = this.passengerCount;   // received as input
     this.bookingInfo.class_type = 'B';   // received as input
     this.bookingInfo.total_fare = this.passengerCount * this.flightSelected.fare_business;

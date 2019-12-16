@@ -110,9 +110,10 @@ onSubmit() {
   onReceipt(val) {
     console.log(val);
     this.selectedFlight = val;
-    const loggedStatus = sessionStorage.getItem('userlogged');
+    const loggedStatus = sessionStorage.getItem('userLogged');
+    console.log(loggedStatus);
     if (loggedStatus !== 'yes') {
-      this.router.navigate(['/login'], { queryParams: { returnUrl: ['/'] }});
+      this.router.navigate(['/login', this.selectedFlight], { queryParams: { returnUrl: ['/'] }});
       this.displayFlightList = false;
       this.bookFlight = true;
     } else {
