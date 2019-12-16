@@ -29,7 +29,7 @@ export class BookinginfoComponent implements OnInit {
     statusFlag: string;
   };
   serviceCallError: HttpHeaders;
-  userId: number;
+  userId: string;
 
 
   constructor(private service: UserService, private router: Router) { }
@@ -37,6 +37,7 @@ export class BookinginfoComponent implements OnInit {
   ngOnInit() {
     this.bookingInfo.cust_email = '';
     this.bookingInfo.credit_card_info = '';
+    this.userId = sessionStorage.getItem('loggedUserId');
   }
 
 
