@@ -1,31 +1,29 @@
+<li *ngFor = "let eachLink of userlinks">
+  <!--    <a href = "{{eachLink}}">{{eachLink}}</a>-->
+  <a [routerLink]="[eachLink.link]">
+    <span>
+      <span>{{eachLink.text}}</span>
+    </span>
+  </a>
 
-<!--<div [hidden]="!visitor">-->
-<!--<ul>-->
-<!--  <li *ngFor = "let eachLink of userlinks">-->
-<!--    &lt;!&ndash;    <a href = "{{eachLink}}">{{eachLink}}</a>&ndash;&gt;-->
-<!--    <a [routerLink]="[eachLink.link]">{{eachLink.text}}</a>-->
+</li>
+<li class="end">
+  <a [routerLink]="['/login']" [ngStyle]="{display: showLogin}">
+    <span>
+      <span>Login</span>
+    </span>
+  </a>
+</li>
+<li class="end">
+  <a [routerLink]="['logout']" [ngStyle]="{display: showLogout}">
+    <span>
+      <span>Logout</span>
+    </span>
+  </a>
+</li>
 
-<!--  </li>-->
-<!--  <li><a [routerLink]="['/login']" [ngStyle]="{display: showLogin}">Login</a> </li>-->
-<!--  <li><a [routerLink]="['/logout']" [ngStyle]="{display: showLogout}">Logout</a> </li>-->
 
-<!--</ul>-->
-<!--</div>-->
-
-
-<!--<div [hidden]="visitor">-->
-<!--  <ul>-->
-<!--    <li *ngFor = "let eachLink of adminlinks">-->
-<!--      &lt;!&ndash;    <a href = "{{eachLink}}">{{eachLink}}</a>&ndash;&gt;-->
-<!--      <a [routerLink]="[eachLink.link]">{{eachLink.text}}</a>-->
-
-<!--    </li>-->
-<!--    <li><a [routerLink]="['/login']" [ngStyle]="{display: showLogin}">Login</a> </li>-->
-<!--    <li><a [routerLink]="['/logout']" [ngStyle]="{display: showLogout}">Logout</a> </li>-->
-
-<!--  </ul>-->
-<!--</div>-->
-
+<!--
 
 <nav class="navbar navbar-inverse navbar-expand-md bg-dark navbar-dark sticky-top">
   <div class="container-fluid">
@@ -33,17 +31,10 @@
       <a class="navbar-brand" href="#"><img src="assets/images/profile.png" alt="Logo" style="width:40px;"></a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar" [hidden]="!visitor">
-<!--      <ul class="nav navbar-nav">-->
-<!--        <li class = "nav-item" class="active"><a class = "nav-link" href="#">Home</a></li>-->
-<!--        <li class = "nav-item"><a class = "nav-link "href="#">About</a></li>-->
-<!--        <li class = "nav-item"><a class = "nav-link" href="#">Projects</a></li>-->
-<!--        <li><a href="#">Contact</a></li>-->
-<!--      </ul>-->
-<!--      <div >-->
               <ul class="nav navbar-nav">
 
           <li class = "nav-item" *ngFor = "let eachLink of userlinks">
-          <!--    <a href = "{{eachLink}}">{{eachLink}}</a>-->
+          &lt;!&ndash;    <a href = "{{eachLink}}">{{eachLink}}</a>&ndash;&gt;
           <a class = "nav-link" [routerLink]="[eachLink.link]">{{eachLink.text}}</a>
         </li>
               </ul>
@@ -54,8 +45,9 @@
         <li class = "nav-item"><a class = "nav-link" [routerLink]="['/logout']" [ngStyle]="{display: showLogout}">Logout</a> </li>
                 </ul>
 
-<!--      </div>-->
+&lt;!&ndash;      </div>&ndash;&gt;
     </div>
   </div>
 </nav>
 
+-->
