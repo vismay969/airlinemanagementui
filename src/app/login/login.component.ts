@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   password = '';
   role = '';
   loggedUserId: number;
+  loggedUser: string;
 
 //   enum ChangeDetectionStrategy {
 //   OnPush: 0
@@ -73,6 +74,7 @@ export class LoginComponent implements OnInit {
     console.log('Data role : ' + data.role);
     console.log(this.invalidUser);
     this.role = data.role;
+    this.loggedUser = data.userName;
     this.loggedUserId = data.userId;
     this.loginForm.reset();
     if (this.username === data.userName && this.password === data.password) {
@@ -81,6 +83,7 @@ export class LoginComponent implements OnInit {
       console.log('Status:' + this.loginStatus);
       sessionStorage.setItem('userLogged', 'yes');
       sessionStorage.setItem('role', this.role);
+      sessionStorage.setItem('loggedUser', this.loggedUser);
       sessionStorage.setItem('loggedUserId', String(this.loggedUserId));
       this.sessionService.changeLoginStatus('logged');
       this.router.navigateByUrl(this.returnUrl);

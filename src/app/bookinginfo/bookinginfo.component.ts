@@ -44,7 +44,7 @@ export class BookinginfoComponent implements OnInit {
   onSubmit(value) {
     console.log( value);
     this.bookingInfo.booking_id = 0;     // zero for sequence
-    this.bookingInfo.flightDate = this.flightSelected.dept_date;  // received as input
+    this.bookingInfo.flightDate = this.flightSelected.dept_time;  // received as input
     this.bookingInfo.noOfPass = this.passengerCount;   // received as input
     this.bookingInfo.class_type = 'B';   // received as input
     this.bookingInfo.total_fare = this.passengerCount * this.flightSelected.fare_business;
