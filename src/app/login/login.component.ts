@@ -93,8 +93,12 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('loggedUserId', String(this.loggedUserId));
       this.sessionService.changeLoginStatus('logged');
       console.log(this.returnUrl);
-      // this.router.navigate(['/home', this.selectedFlight]);
-      this.router.navigate([this.returnUrl[0], this.selectedFlight]);
+      if (this.returnUrl === '/') {
+        this.router.navigateByUrl('/home');
+      } else {
+        // this.router.navigate(['/home', this.selectedFlight]);
+        this.router.navigate([this.returnUrl[0], this.selectedFlight]);
+      }
       // this.router.navigateByUrl(this.returnUrl);
     } else {
       this.invalidUser = true;

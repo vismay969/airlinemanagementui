@@ -30,7 +30,7 @@ export class UserService {
   }
 
   // add in user service
-  findAllBookingInfobyUserId(userId: number): Observable<BookingInfo[]> {
+  findAllBookingInfobyUserId(userId: string): Observable<BookingInfo[]> {
     return this.client.get<BookingInfo[]>(this.baseURL + '/bookingInfo/' + userId);
   }
 

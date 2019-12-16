@@ -27,20 +27,26 @@
   </thead>
   <tr *ngFor="let eachBooking of bookingList  | paginate : {itemsPerPage:4,currentPage:p}" >
 
-    <td>{{eachBooking.flightDate| date}}</td>
+    <td>{{eachBooking.flightDate}}</td>
     <td>{{eachBooking.cust_email}}</td>
     <td>{{eachBooking.class_type}}</td>
     <td>{{eachBooking.noOfPass}}</td>
     <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
     <td>
-      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))" (click)="cancelBookingEntry(eachBooking)"
-              class="btn btn-danger fa fa-remove">Cancel
-      </button>
+      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))
+      && ('N' === (eachBooking.statusFlag))" (click)="cancelBookingEntry(eachBooking)"
+              class="btn btn-danger fa fa-remove">Cancel</button>
     </td>
-    <td><label *ngIf="((now | date) >= (eachBooking.flightDate | date))"
-               class="btn btn-info fa fa-plane">Departed</label></td>
-    <td><label *ngIf="('Y' === (eachBooking.statusFlag))" class="btn btn-info fa fa-remove">Cancelled</label></td>
 
+    <td>
+      <label *ngIf="((now | date) >= (eachBooking.flightDate | date))
+      && ('N' === (eachBooking.statusFlag))"
+               class="btn btn-info fa fa-plane">Departed</label>
+    </td>
+
+    <td><label *ngIf="('Y' === (eachBooking.statusFlag))"
+               class="btn btn-info fa fa-remove">Cancelled</label>
+    </td>
 
   </tr>
 </table>
