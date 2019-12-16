@@ -28,6 +28,7 @@ const routes: Routes = [
   {path: 'info', component: AboutusComponent},
   {path: 'history', component: BookinghistoryComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'login', component: RegisteruserComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'schedule', component: SearchschedulesComponent},
   {path: '**', redirectTo: 'home'}

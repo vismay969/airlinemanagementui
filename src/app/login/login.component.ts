@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.createForm();
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
     console.log(this.returnUrl);
-    this.selectedFlight
+    // this.selectedFlight
   }
 
 
