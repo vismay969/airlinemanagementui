@@ -13,7 +13,7 @@
   "Delete Successful"
 </ng-template>
 
-<table class="table table-dark table-striped">
+<table class="table table-dark table-striped table-hover table-bordered">
   <thead class="thead-dark">
 <!--    <th>From</th>-->
 <!--    <th>To</th>-->
@@ -21,34 +21,35 @@
     <th>Flight Date</th>
     <th>Customer Email</th>
     <th>Class</th>
-    <th>Passenger Count</th>
+    <th>Seats Booked</th>
     <th>Total Fare</th>
+    <th>Status</th>
+
 
   </thead>
-  <tr *ngFor="let eachBooking of bookingList  | paginate : {itemsPerPage:4,currentPage:p}" >
+  <tr *ngFor="let eachBooking of bookingList  | paginate : {itemsPerPage:5,currentPage:p}" >
 
-    <td>{{eachBooking.flightDate| date}}</td>
+    <td>{{eachBooking.flightDate}}</td>
     <td>{{eachBooking.cust_email}}</td>
     <td>{{eachBooking.class_type}}</td>
     <td>{{eachBooking.noOfPass}}</td>
     <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
     <td>
-      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))"
-              (click)="cancelBookingEntry(eachBooking,template)"
-              class="btn btn-danger fa fa-remove">Cancel
-      </button>
-      <ng-template #template>
-        <div class="modal-body text-center">
-          <p>Do you want to confirm?</p>
-          <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
-          <button type="button" class="btn btn-primary" (click)="decline()">No</button>
-        </div>
-      </ng-template>
+      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))
+      && ('N' === (eachBooking.statusFlag))" (click)="cancelBookingEntry(eachBooking)"
+              class="btn btn-danger btn-block fa fa-remove">Cancel</button>
+<!--    </td>-->
 
+<!--    <td>-->
+      <button *ngIf="((now | date) >= (eachBooking.flightDate | date))
+      && ('N' === (eachBooking.statusFlag))"
+               class="btn btn-secondary btn-block fa fa-archive" [disabled]="true">Departed</button>
+<!--    </td>-->
+
+<!--    <td>-->
+    <button *ngIf="('Y' === (eachBooking.statusFlag))"
+               class="btn btn-warning btn-block fa fa-exclamation" [disabled]="true">Cancelled</button>
     </td>
-    <td><label *ngIf="((now | date) >= (eachBooking.flightDate | date))"
-               class="btn btn-info fa fa-plane">Departed</label></td>
-    <td><label *ngIf="('Y' === (eachBooking.statusFlag))" class="btn btn-info fa fa-remove">Cancelled</label></td>
   </tr>
 </table>
 <pagination-controls (pageChange) = "p=$event"></pagination-controls>

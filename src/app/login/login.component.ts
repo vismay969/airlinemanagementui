@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   userDetails: UserDetails;
   loginForm: FormGroup;
   selectedFlight: FlightList;
+  inputFlight: any;
   loginStatus = '';
   invalidUser: boolean;
   serviceCallError: string;
@@ -51,9 +52,14 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.createForm();
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
     console.log(this.returnUrl);
-    this.route.queryParams.subscribe(params => {
-      this.selectedFlight = params['param1'];
+    // console.log(this.route.snapshot.queryParams.returnUrl);
+    console.log(this.route.snapshot.paramMap.get('selectedFlight'));
+    this.route.params.subscribe(params => {
+      console.log(params);
+      this.inputFlight = params;
+      this.selectedFlight = this.inputFlight;
     });
+    console.log(this.selectedFlight);
   }
 
 
@@ -86,7 +92,14 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('loggedUser', this.loggedUser);
       sessionStorage.setItem('loggedUserId', String(this.loggedUserId));
       this.sessionService.changeLoginStatus('logged');
-      this.router.navigateByUrl(this.returnUrl);
+      console.log(this.returnUrl);
+      if (this.returnUrl === '/') {
+        this.router.navigateByUrl('/home');
+      } else {
+        // this.router.navigate(['/home', this.selectedFlight]);
+        this.router.navigate([this.returnUrl[0], this.selectedFlight]);
+      }
+      // this.router.navigateByUrl(this.returnUrl);
     } else {
       this.invalidUser = true;
       this.loginStatus = 'Invalid user';

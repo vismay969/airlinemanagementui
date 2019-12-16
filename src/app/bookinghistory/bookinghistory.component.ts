@@ -31,7 +31,7 @@ export class BookinghistoryComponent implements OnInit {
 
 
   bookingList: BookingInfo[];
-  userId = 1;
+  userId: string;
   idxpos = 0;
   p: number;
   updateSuccess: BookingInfo;
@@ -47,9 +47,18 @@ export class BookinghistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.findAllBookingInfobyUserId(this.userId).subscribe(data => this.bookingList = data);
-    console.log(this.now);
-    console.log(this.bookingList);
+    const loggedStatus = sessionStorage.getItem('userLogged');
+    console.log(loggedStatus);
+    if (loggedStatus !== 'yes') {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: ['/history'] }});
+    } else {
+      this.userId = sessionStorage.getItem('loggedUserId');
+      console.log(this.userId);
+      this.service.findAllBookingInfobyUserId(this.userId).subscribe(data => this.bookingList = data);
+      console.log(this.now);
+      console.log(this.bookingList);
+    }
+
   }
 
   // openModal(template: TemplateRef<any>) {

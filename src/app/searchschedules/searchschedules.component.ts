@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../user.service';
 import {AirportMaster} from '../airportmaster';
 import {FlightList} from '../flightlist';
+import {AdminService} from "../admin.service";
 
 
 @Component({
@@ -19,34 +20,26 @@ export class SearchschedulesComponent implements OnInit {
   seatsFirst = 0;
   seatsBus = 0;
   adminsearchscheduleForm: FormGroup;
-  dataconfig: any[] = [
-    {name: 'dept_abbr', type: 'text', label: 'Departure Airport',
+
+  formConfig1: any[] = [
+    {name: 'dept_abbr', type: 'text', label: 'Departure Airport', text : 'leftbox',
       errorMsg: 'Departure Airport Required',
       constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
-    {name: 'arr_abbr', type: 'text', label: 'Arrival Airport',
+    {name: 'arr_abbr', type: 'text', label: 'Arrival Airport', text : 'leftbox',
       errorMsg: 'Arrival Airport Required',
       constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
   ];
-
-/*  dataconfig1: any[] = [
-    {
-      name: 'airline', type: 'text', label: 'Airline',
-      errorMsg: 'Please select the airline to search',
-      constraint: [Validators.required]
-    },
-  ];*/
-
-  dataconfig2: any[] = [
-    {
-      name: 'dept_date', type: 'date', label: 'Departure Date',
+  formConfig2: any[] = [
+    {name: 'dept_date', type: 'date', label: 'Departure Date', text : 'leftbox',
       errorMsg: 'Departure Date Required',
-      constraint: Validators.required
-    },
+      constraint: Validators.required},
   ];
-   displayFlightList = false;
+
+  displayFlightList = false;
    editFlight =  false;
 
-  constructor(private fb: FormBuilder, private router: Router, private service: UserService) {
+
+  constructor(private fb: FormBuilder, private router: Router, private service: AdminService) {
   }
 
   ngOnInit() {
@@ -56,21 +49,17 @@ export class SearchschedulesComponent implements OnInit {
 
   createForm(): FormGroup {
     const group = this.fb.group({});
-    this.dataconfig.forEach(eachConfig => {
+    this.formConfig1.forEach(eachConfig => {
       group.addControl(eachConfig.name, new FormControl(
         '', {validators: eachConfig.constraint}));
     });
-    /*this.dataconfig1.forEach(eachConfig => {
-      group.addControl(eachConfig.name, new FormControl(
-        '', {validators: eachConfig.constraint}));
-    });*/
-
-    this.dataconfig2.forEach(eachConfig => {
+    this.formConfig2.forEach(eachConfig => {
       group.addControl(eachConfig.name, new FormControl(
         '', {validators: eachConfig.constraint}));
     });
     return group;
   }
+
 
   onSubmit() {
 
@@ -79,7 +68,7 @@ export class SearchschedulesComponent implements OnInit {
     const depDate = this.adminsearchscheduleForm.get('dept_date').value;
 
       // this.router.navigate(['/showcustomer']);
-    this.service.searchUserFlights(this.seatsBus, this.seatsFirst, depAbbr, arrAbbr, depDate)
+    this.service.searchAdminFlights(this.seatsBus, this.seatsFirst, depAbbr, arrAbbr, depDate)
         .subscribe(data => {
           this.flightList = data;
           this.displayFlightList = true;
@@ -97,7 +86,7 @@ export class SearchschedulesComponent implements OnInit {
 
   onReturn(val) {
     console.log(val);
-    this.displayFlightList = false;
+    this.displayFlightList = true;
     this.editFlight = false;
     this.adminsearchscheduleForm.reset();
 
