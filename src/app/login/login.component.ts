@@ -5,6 +5,7 @@ import {UserDetails} from '../userdetail';
 import {HttpHeaders} from '@angular/common/http';
 import {UserService} from '../user.service';
 import {CompinteractionService} from '../compinteraction.service';
+import {FlightList} from '../flightlist';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('frm', {static: false}) form: any;
   userDetails: UserDetails;
   loginForm: FormGroup;
+  selectedFlight: FlightList;
   loginStatus = '';
   invalidUser: boolean;
   serviceCallError: string;
@@ -47,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.createForm();
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
     console.log(this.returnUrl);
+    this.selectedFlight
   }
 
 

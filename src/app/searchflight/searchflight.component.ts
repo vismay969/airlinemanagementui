@@ -112,7 +112,7 @@ onSubmit() {
     this.selectedFlight = val;
     const loggedStatus = sessionStorage.getItem('userlogged');
     if (loggedStatus !== 'yes') {
-      this.router.navigate(['/login'], { queryParams: { returnUrl: ['/'] }});
+      this.router.navigate(['/login', this.selectedFlight], { queryParams: { returnUrl: ['/'] }});
       this.displayFlightList = false;
       this.bookFlight = true;
     } else {
