@@ -1,0 +1,34 @@
+<table class="table table-striped" >
+  <thead><td>Search By AirLine</td>
+  <td><input [(ngModel)]="srchString"></td>
+  <tr>
+    <td>
+      {{classSelected}}
+    </td>
+    <td>
+      {{passengerCount}}
+    </td>
+  </tr>
+
+  <tr>
+    <th>Flight AirLine</th>
+    <th>Departure Time</th>
+    <th>Arrival Time</th>
+    <th>Fare</th>
+<!--    <th>Price</th>-->
+  </tr>
+  </thead>
+  <tbody>
+  <!--| filter: 'airline'
+  : srchString-->
+  <tr *ngFor="let eachflight of flightSelection | paginate:{ itemsPerPage: 5,currentPage: page}">
+    <td>{{eachflight.airline}}</td>
+    <td>{{eachflight.dept_time | date: 'medium'}}</td>
+    <td>{{eachflight.arr_time | date: 'medium'}}</td>
+    <td>{{eachflight.fare_business | currency: 'INR'}}</td>
+    <button (click)="onBook(eachflight)" class="btn btn-info fa fa-plane"> Book</button>
+  </tr>
+  </tbody>
+</table>
+
+<pagination-controls (pageChange)="page=$event"></pagination-controls>

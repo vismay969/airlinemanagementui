@@ -1,0 +1,40 @@
+<!--{{bookingList[0].booking_id |json}}-->
+
+<!--{{bookingList|json}} print the value in json-->
+
+
+<div class="alert alert-danger" *ngIf="deleteError">
+  Error Cancelling Booking
+</div>
+<div class="alert alert-success" *ngIf="successFlag">
+  Success! Your Booking Cancelled Successfully
+</div>
+<ng-template #Success>
+  "Delete Successful"
+</ng-template>
+
+<table class="table table-striped">
+  <tr>
+<!--    <th>From</th>-->
+<!--    <th>To</th>-->
+<!--    <th>Airline</th>-->
+    <th>Flight Date</th>
+    <th>Customer Email</th>
+    <th>Class</th>
+    <th>Passenger Count</th>
+    <th>Total Fare</th>
+
+  </tr>
+  <tr *ngFor="let eachBooking of bookingList  | paginate : {itemsPerPage:4,currentPage:p}" >
+
+    <td>{{eachBooking.flightDate| date}}</td>
+    <td>{{eachBooking.cust_email}}</td>
+    <td>{{eachBooking.class_type}}</td>
+    <td>{{eachBooking.noOfPass}}</td>
+    <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
+    <td><button *ngIf="((now | date) >= (eachBooking.flightDate | date))" (click) = "cancelBookingEntry(eachBooking)" class="btn btn-danger fa fa-remove">Cancel</button></td>
+
+
+  </tr>
+</table>
+<pagination-controls (pageChange) = "p=$event"></pagination-controls>
