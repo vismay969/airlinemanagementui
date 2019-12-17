@@ -8,7 +8,7 @@ import {FlightList} from '../flightlist';
 })
 export class DisplayflightdetailsComponent implements OnInit {
   @Input() flightSelection: FlightList[];
-  @Input() classSelected: number;
+  @Input() classSelected: string;
   @Input() passengerCount: number;
   @Output() flightSelected: EventEmitter<FlightList> =
     new EventEmitter<FlightList>();

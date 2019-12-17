@@ -55,7 +55,16 @@
     <button *ngIf="('Y' === (eachBooking.statusFlag))"
                class="btn btn-warning btn-block fa fa-exclamation" [disabled]="true">&nbsp;&nbsp;Cancelled&nbsp;&nbsp;</button>
     </td>
-
   </tr>
 </table>
 <pagination-controls (pageChange) = "p=$event"></pagination-controls>
+
+
+<!--<button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button>-->
+<!--<ng-template #template>-->
+<!--  <div class="modal-body text-center">-->
+<!--    <p>Do you want to confirm?</p>-->
+<!--    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>-->
+<!--    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>-->
+<!--  </div>-->
+<!--</ng-template>-->
