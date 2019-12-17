@@ -4,7 +4,7 @@
   <input [(ngModel)]="srchString"/></div>
 
 <div class="alert alert-success" *ngIf="statusFlag">
-  Flight Edited Successfully
+  Flight Updated Successfully
 </div>
 <div>
 <table class="table table-striped" >
@@ -32,11 +32,10 @@
   <tbody>
   <!--| filter: 'airline'
   : srchString-->
-  <tr *ngFor="let eachflight of flightSelection | paginate:{ itemsPerPage: 5,currentPage: page}">
+  <tr *ngFor="let eachflight of flightSelection | filter: 'airline': srchString | paginate:{ itemsPerPage: 5,currentPage: page}">
     <td>{{eachflight.airline}}</td>
-    <td>{{eachflight.arr_abbr}}</td>
     <td>{{eachflight.dept_abbr}}</td>
-
+    <td>{{eachflight.arr_abbr}}</td>
     <td>{{eachflight.dept_time }}</td>
     <td>{{eachflight.arr_time }}</td>
     <td>{{eachflight.fare_business | currency: 'INR'}}</td>
