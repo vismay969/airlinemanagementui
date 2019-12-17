@@ -57,7 +57,7 @@ export class SearchflightComponent implements OnInit {
   formConfig4: any[] = [
     {name: 'noofseats', type: 'number', label: 'No. of Seats', text : 'leftbox',
       errorMsg: 'No. of Seats Required',
-      constraint: [Validators.required, Validators.max(5), Validators.min(1)] },
+      constraint: [Validators.required, Validators.max(6), Validators.min(1)] },
   ];
 private loginStatus = 'invalid user';
 FlightClass = ['Business', 'First'];
