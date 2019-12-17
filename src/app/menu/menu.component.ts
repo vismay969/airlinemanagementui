@@ -14,14 +14,14 @@ export class MenuComponent implements OnInit {
   visitor = true;
 
   userlinks: Navlink[] = [
-    {link: 'home', text: 'Home'},
+    {link: 'home/default', text: 'Home'},
     {link: 'info', text: 'About Us'},
     {link: 'bookflight', text: 'Book Flight'},
     {link: 'history', text: 'My Bookings'}
   ];
 
   adminlinks: Navlink[] = [
-    {link: 'home', text: 'Home'},
+    {link: 'home/default', text: 'Home'},
     {link: 'info', text: 'About Us'},
     {link: 'schedule', text: 'Flight Schedule'}
   ];

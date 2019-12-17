@@ -59,6 +59,7 @@ PassengerCount = [1, 2, 3, 4, 5, 6];
 constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) { }
 
 ngOnInit() {
+  console.log('In Init');
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
   this.searchflightForm.reset();
