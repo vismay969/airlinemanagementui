@@ -22,20 +22,21 @@
   </div>
   <ng-container *ngFor="let eachConfig of formConfig">
     <div class="form-group">
-      <label>{{eachConfig.label}}</label>
-      <input type={{eachConfig.type}} name={{eachConfig.name}}
-             formControlName={{eachConfig.name}} class="form-control" />
-      <span *ngIf="loginForm.get(eachConfig.name).hasError('required')
+      <div class="col-xl-4">
+        <label>{{eachConfig.label}}</label>
+        <input type={{eachConfig.type}} name={{eachConfig.name}}
+               formControlName={{eachConfig.name}} class="form-control"/>
+        <span *ngIf="loginForm.get(eachConfig.name).hasError('required')
   && loginForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}</span>
+      </div>
     </div>
   </ng-container>
 
   <div class = "container-fluid">
   <div class = "row">
-    <span class = "col-md-10"></span>
-    <span class = "col-md-2">
+    &nbsp;&nbsp;&nbsp;&nbsp;
        <input class = "btn btn-info" type = "submit" value = "Login" [disabled]="loginForm.invalid">
-      </span>
+
   </div>
   </div>
 

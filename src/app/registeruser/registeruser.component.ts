@@ -11,6 +11,7 @@ import {UserService} from '../user.service';
 })
 export class RegisteruserComponent implements OnInit {
 
+
   registerDetails: UserDetails = new class implements UserDetails {
     userId: number;
     userName: string;
@@ -19,7 +20,10 @@ export class RegisteruserComponent implements OnInit {
     role: string;
   };
 
-  constructor(private fb: FormBuilder, private router: Router ,  private service: UserService) { }
+  serviceCallError = '';
+
+  constructor(private fb: FormBuilder, private router: Router, private service: UserService) {
+  }
 
 
   ngOnInit() {
@@ -33,9 +37,18 @@ export class RegisteruserComponent implements OnInit {
     this.service.addUser(this.registerDetails).subscribe(data => {
       this.registerDetails = data;
       this.router.navigate(['/login']);
-  });
+    }, (err) => {
+      this.captureError(err);
+    });
       }
 
+  captureError(error) {
+    this.serviceCallError = error.error.message;
+    console.log(' in captureError func  ---------------------------- ');
+    console.log(this.serviceCallError);
+    // this.form.reset();
+
+  }
 }
 
 
