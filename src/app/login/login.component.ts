@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   userDetails: UserDetails;
   loginForm: FormGroup;
   selectedFlight: FlightList;
+  seatsCount: number;
+  psgClass: string;
   inputFlight: any;
   loginStatus = '';
   invalidUser: boolean;
@@ -50,9 +52,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.createForm();
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl[0] || '/';
+    this.psgClass = this.route.snapshot.queryParams.returnUrl[1] || 0;
+    this.seatsCount = this.route.snapshot.queryParams.returnUrl[2] || 0;
     console.log(this.returnUrl);
-    // console.log(this.route.snapshot.queryParams.returnUrl);
+    console.log(this.seatsCount);
+    console.log(this.route.snapshot.queryParams.returnUrl);
     console.log(this.route.snapshot.paramMap.get('selectedFlight'));
     this.route.params.subscribe(params => {
       console.log(params);
@@ -97,7 +102,8 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       } else {
         // this.router.navigate(['/home', this.selectedFlight]);
-        this.router.navigate([this.returnUrl[0], this.selectedFlight]);
+        this.router.navigate([this.returnUrl, this.selectedFlight],
+        { queryParams: { returnUrl: [this.psgClass, this.seatsCount]}});
       }
       // this.router.navigateByUrl(this.returnUrl);
     } else {

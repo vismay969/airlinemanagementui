@@ -15,15 +15,15 @@ export class MenuComponent implements OnInit {
 
   userlinks: Navlink[] = [
     {link: 'home', text: 'Home'},
-    {link: 'info', text: 'About'},
-    {link: 'bookflight', text: 'Book'},
-    {link: 'history', text: 'History'}
+    {link: 'info', text: 'About Us'},
+    {link: 'bookflight', text: 'Book Flight'},
+    {link: 'history', text: 'My Bookings'}
   ];
 
   adminlinks: Navlink[] = [
     {link: 'home', text: 'Home'},
     {link: 'info', text: 'About Us'},
-    {link: 'schedule', text: 'Search Flight Schedule'}
+    {link: 'schedule', text: 'Flight Schedule'}
   ];
 
 
