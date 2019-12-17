@@ -72,7 +72,7 @@ export class SearchschedulesComponent implements OnInit {
     const depDate = this.adminsearchscheduleForm.get('dept_date').value;
 
       // this.router.navigate(['/showcustomer']);
-    this.service.searchAdminFlights(this.seatsBus, this.seatsFirst, depAbbr, arrAbbr, depDate)
+    this.service.searchAdminFlights(this.seatsBus, this.seatsFirst, arrAbbr, depAbbr,  depDate)
         .subscribe(data => {
           this.flightList = data;
           this.displayFlightList = true;

@@ -17,11 +17,14 @@ export class LoginComponent implements OnInit {
   userDetails: UserDetails;
   loginForm: FormGroup;
   selectedFlight: FlightList;
+  seatsCount: number;
+  psgClass: string;
   inputFlight: any;
   loginStatus = '';
-  invalidUser: boolean;
+  invalidUser = false;
   serviceCallError: string;
   returnUrl: string;
+  returnParams: string[];
   username = '';
   password = '';
   role = '';
@@ -49,10 +52,18 @@ export class LoginComponent implements OnInit {
   ];
 
   ngOnInit() {
+    console.log(this.invalidUser);
     this.loginForm = this.createForm();
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    this.returnParams =  (this.route.snapshot.queryParams.returnUrl || '/');
+    console.log(this.returnParams);
+    if (this.returnParams.length === 3) {
+    this.returnUrl = this.route.snapshot.queryParams.returnParams[0] || '/';
+    this.psgClass = this.route.snapshot.queryParams.returnParams[1] || 0;
+    this.seatsCount = this.route.snapshot.queryParams.returnParams[2] || 0;
+    }
     console.log(this.returnUrl);
-    // console.log(this.route.snapshot.queryParams.returnUrl);
+    console.log(this.seatsCount);
+    console.log(this.route.snapshot.queryParams.returnUrl);
     console.log(this.route.snapshot.paramMap.get('selectedFlight'));
     this.route.params.subscribe(params => {
       console.log(params);
@@ -93,11 +104,12 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('loggedUserId', String(this.loggedUserId));
       this.sessionService.changeLoginStatus('logged');
       console.log(this.returnUrl);
-      if (this.returnUrl === '/') {
+      if (this.returnParams[0] === '/') {
         this.router.navigateByUrl('/home');
       } else {
         // this.router.navigate(['/home', this.selectedFlight]);
-        this.router.navigate([this.returnUrl[0], this.selectedFlight]);
+        this.router.navigate([this.returnUrl, this.selectedFlight],
+        { queryParams: { returnUrl: [this.psgClass, this.seatsCount]}});
       }
       // this.router.navigateByUrl(this.returnUrl);
     } else {

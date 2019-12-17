@@ -21,7 +21,10 @@ import { LogoutComponent } from './logout/logout.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { DisplayflightscheduleComponent } from './displayflightschedule/displayflightschedule.component';
 import { EditflightscheduleComponent } from './editflightschedule/editflightschedule.component';
-import {ModalModule} from 'ngx-bootstrap/modal';
+import { AirportinfoComponent } from './airportinfo/airportinfo.component';
+import { ViewflightmasterComponent } from './viewflightmaster/viewflightmaster.component';
+import {ModalModule} from 'ngx-bootstrap';
+import { FilterPipe } from './filter.pipe';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -60,6 +63,9 @@ const routes: Routes = [
     AboutusComponent,
     DisplayflightscheduleComponent,
     EditflightscheduleComponent,
+    AirportinfoComponent,
+    ViewflightmasterComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,

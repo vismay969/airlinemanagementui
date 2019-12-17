@@ -2,12 +2,11 @@
   <thead><td>Search By AirLine</td>
   <td><input [(ngModel)]="srchString"></td>
   <tr>
-    <td>
-      {{classSelected}}
-    </td>
-    <td>
-      {{passengerCount}}
-    </td>
+
+    <td>From :{{flightSelection[0].dept_abbr}}</td>
+    <td>To :{{flightSelection[0].arr_abbr}}</td>
+    <td>Class: {{classSelected}}</td>
+    <td>Pass Count :{{passengerCount}}</td>
   </tr>
 
   <tr>
@@ -15,13 +14,13 @@
     <th>Departure Time</th>
     <th>Arrival Time</th>
     <th>Fare</th>
-<!--    <th>Price</th>-->
+    <!--    <th>Price</th>-->
   </tr>
   </thead>
   <tbody>
   <!--| filter: 'airline'
   : srchString-->
-  <tr *ngFor="let eachflight of flightSelection | paginate:{ itemsPerPage: 5,currentPage: page}">
+  <tr *ngFor="let eachflight of flightSelection | filter: 'airline': srchString  | paginate:{ itemsPerPage: 5,currentPage: page}">
     <td>{{eachflight.airline}}</td>
     <td>{{eachflight.dept_time | date: 'medium'}}</td>
     <td>{{eachflight.arr_time | date: 'medium'}}</td>

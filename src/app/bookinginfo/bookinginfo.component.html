@@ -46,7 +46,8 @@
 
         <tr class="table-info">
           <td>Total Fare</td>
-          <td>{{flightSelected.fare_business * passengerCount}}</td>
+          <td *ngIf="(classSelected === 'Business')">{{flightSelected.fare_business * passengerCount}}</td>
+          <td *ngIf="(classSelected === 'First')">{{flightSelected.fare_first * passengerCount}}</td>
         </tr>
 
         <tr>

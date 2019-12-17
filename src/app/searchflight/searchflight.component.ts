@@ -21,9 +21,13 @@ export class SearchflightComponent implements OnInit {
   psgClass: string;
   seatsBus: number ;
   seatsFirst: number;
+  seatsCount: number;
   displayFlightList = false;
   bookFlight = false;
+  returnParams: string[];
   airportList: AirportMaster[];
+  // returnUrl: string;
+
   searchflightForm: FormGroup;
   formConfig1: any[] = [
   {name: 'dept_abbr', type: 'text', label: 'Departure Airport', text : 'leftbox',
@@ -52,12 +56,16 @@ private loginStatus = 'invalid user';
 FlightClass = ['Business', 'First'];
 PassengerCount = [1, 2, 3, 4, 5, 6];
 
-  constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) {
-  }
+constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) { }
 
 ngOnInit() {
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
+  this.returnParams = this.route.snapshot.queryParams.returnUrl || '';
+  if (this.returnParams.length === 2) {
+    this.seatsCount = this.route.snapshot.queryParams.returnUrl[1] || 0;
+    this.psgClass = this.route.snapshot.queryParams.returnUrl[0] || '';
+  }
   this.route.params.subscribe(params => {
     console.log(params);
     this.inputFlight = params;
@@ -106,10 +114,13 @@ onSubmit() {
   this.psgClass = this.searchflightForm.get('class').value;
   if (this.psgClass === 'Business') {
     this.seatsBus = this.searchflightForm.get('noofseats').value;
+    this.seatsCount = this.seatsBus;
     this.seatsFirst = 0;
   } else {
     this.seatsBus = 0;
     this.seatsFirst = this.searchflightForm.get('noofseats').value;
+    this.seatsCount = this.seatsFirst;
+
   }
   console.log(this.seatsBus);
   console.log(this.seatsFirst);
@@ -130,10 +141,13 @@ onSubmit() {
     const loggedStatus = sessionStorage.getItem('userLogged');
     console.log(loggedStatus);
     if (loggedStatus !== 'yes') {
-      this.router.navigate(['/login', this.selectedFlight], {queryParams: {returnUrl: ['/home']}});
+      console.log('redirect to login');
+      this.router.navigate(['/login', this.selectedFlight],
+        { queryParams: { returnUrl: ['/home', this.psgClass, this.seatsCount] }});
       this.displayFlightList = false;
       this.bookFlight = true;
     } else {
+      console.log('redirect to book');
       this.displayFlightList = false;
       this.bookFlight = true;
     }
@@ -143,6 +157,8 @@ onSubmit() {
     console.log(val);
     this.selectedTicket = val;
     console.log(this.selectedTicket);
+    console.log(this.psgClass);
+    console.log(this.seatsBus);
     this.router.navigate(['/flightticket', this.selectedTicket]);
     console.log('not routing');
     // this.displayFlightList = false;

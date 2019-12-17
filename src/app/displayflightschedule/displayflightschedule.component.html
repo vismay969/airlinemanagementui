@@ -1,23 +1,23 @@
 <div *ngIf="displayFlightList">
 
-  <div>Search By AirLine:
-    <input [(ngModel)]="srchString"/></div>
+<div>Search By AirLine:
+  <input [(ngModel)]="srchString"/></div>
 
-  <div class="alert alert-success" *ngIf="statusFlag">
-    Flight Edited Successfully
-  </div>
-  <div>
-    <table class="table table-striped">
+<div class="alert alert-success" *ngIf="statusFlag">
+  Flight Updated Successfully
+</div>
+<div>
+<table class="table table-striped" >
 
-      <!--  <tr>-->
-      <!--    <td>-->
-      <!--      {{classSelected}}-->
-      <!--    </td>-->
-      <!--    <td>-->
-      <!--      {{passengerCount}}-->
-      <!--    </td>-->
-      <!--  </tr>-->
-      <thead>
+<!--  <tr>-->
+<!--    <td>-->
+<!--      {{classSelected}}-->
+<!--    </td>-->
+<!--    <td>-->
+<!--      {{passengerCount}}-->
+<!--    </td>-->
+<!--  </tr>-->
+<thead>
   <tr>
     <th>AirLine</th>
     <th>From</th>
@@ -32,11 +32,10 @@
   <tbody>
   <!--| filter: 'airline'
   : srchString-->
-  <tr *ngFor="let eachflight of flightSelection | paginate:{ itemsPerPage: 5,currentPage: page}">
+  <tr *ngFor="let eachflight of flightSelection | filter: 'airline': srchString | paginate:{ itemsPerPage: 5,currentPage: page}">
     <td>{{eachflight.airline}}</td>
-    <td>{{eachflight.arr_abbr}}</td>
     <td>{{eachflight.dept_abbr}}</td>
-
+    <td>{{eachflight.arr_abbr}}</td>
     <td>{{eachflight.dept_time }}</td>
     <td>{{eachflight.arr_time }}</td>
     <td>{{eachflight.fare_business | currency: 'INR'}}</td>
@@ -49,10 +48,10 @@
 </table>
 
 <pagination-controls (pageChange)="page=$event"></pagination-controls>
-  </div>
+</div>
 </div>
 <div class="col-md-12">
-  <app-editflightschedule [flightSelectedObj]='flightSelected'
-                          (succcessFlag)='onReturn($event)' *ngIf="editFlight"></app-editflightschedule>
+<app-editflightschedule [flightSelectedObj]= 'flightSelected'
+                        (succcessFlag)='onReturn($event)' *ngIf="editFlight"></app-editflightschedule>
 
 </div>
