@@ -63,8 +63,8 @@ ngOnInit() {
   this.searchflightForm = this.createForm();
   this.returnParams = this.route.snapshot.queryParams.returnUrl || '';
   if (this.returnParams.length === 2) {
-    this.seatsCount = this.route.snapshot.queryParams.returnUrl[1] || 0;
-    this.psgClass = this.route.snapshot.queryParams.returnUrl[0] || '';
+    this.seatsCount = (Number(this.returnParams[1]) || 0);
+    this.psgClass = this.returnParams[0] || '';
   }
   this.route.params.subscribe(params => {
     console.log(params);
