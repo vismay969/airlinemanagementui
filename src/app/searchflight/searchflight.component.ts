@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {FlightList} from '../flightlist';
 import {BookingInfo} from '../bookinginfo';
 
+
 @Component({
   selector: 'app-searchflight',
   templateUrl: './searchflight.component.html',
@@ -26,6 +27,11 @@ export class SearchflightComponent implements OnInit {
   bookFlight = false;
   airportList: AirportMaster[];
   returnUrl: string;
+  now = new Date();
+  month = this.now.getMonth() + 1;
+  today = this.now.getFullYear().toString() + '-' + this.month.toString() + '-' + this.now.getUTCDate().toString();
+  minDate = this.today;
+  maxDate = '2020-12-31';
 
   searchflightForm: FormGroup;
   formConfig1: any[] = [
