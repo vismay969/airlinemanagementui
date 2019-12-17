@@ -1,25 +1,57 @@
-
 <div class="container">
   <div class="row">
-    <div class="form_bg">
-      <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+    <div class="col text-center">
+      <!--      <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">-->
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit(f.value)" #f="ngForm" novalidate>
         <h2 class="text-center">Registration page</h2>
         <br/>
         <div class="form-group">
-          <input type="email" class="form-control" id = "userName" placeholder="Email" name="userName" email required  [(ngModel)]="registerDetails.userName">
-          <!--          <span class="help-bpx" *ngIf="email.touched && !email.valid ">Please enter the Email Value</span>-->
+          <div class="col-xl-4">
+            <label id="col-xl-4" class="col text-left">Email</label>
+            <input placeholder="EmailId" type="email" class="form-control" name="userName"
+                   [(ngModel)]="registerDetails.userName" #email="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email/>
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <input type="password" class="form-control"  placeholder="Password" name="password" required  [(ngModel)]="registerDetails.password">
+          <div class="col-xl-4">
+            <label id="col-xl-4" class="col text-left">Password</label>
+            <input placeholder="Password" type="password" class="form-control" name="password"
+                   [(ngModel)]="registerDetails.password" #password="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6"/>
+            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="mobileNo" placeholder="MobileNo" name="mobileNo" required  [(ngModel)]="registerDetails.mobileNo">
+          <div class="col-xl-4">
+            <label for="ex1" class="col text-left">Mobile No</label>
+            <input placeholder="MobileNo" type="number" id="ex1" class="form-control" name="mobileNo"
+                   [(ngModel)]="registerDetails.mobileNo" #mobileNo="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && mobileNo.invalid }" required minlength="10"
+                   maxlength="10"/>
+
+            <div *ngIf="f.submitted && mobileNo.invalid" class="invalid-feedback">
+              <div *ngIf="mobileNo.errors.required">Mobile No is required</div>
+              <div *ngIf="mobileNo.errors.minlength">Mobile No must be 10 digits</div>
+              <div *ngIf="mobileNo.errors.maxlength">Mobile No must be 10 digits</div>
+            </div>
+          </div>
         </div>
+
+
         <div class="form-group">
         </div>
         <br/>
-        <div class="align-center">
-          <button type="submit" class="btn btn-default" id="register" [disabled]="!form.valid" >Register</button>
+        <div class="col-xl-3">
+          <button type="submit" class="col text-left btn btn-info" id="register">Register</button>
+          <strong *ngIf="serviceCallError !== ''">UserEmailId already Present ! </strong>
         </div>
       </form>
     </div>
