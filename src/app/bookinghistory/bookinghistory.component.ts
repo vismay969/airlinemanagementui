@@ -72,21 +72,21 @@ export class BookinghistoryComponent implements OnInit {
 
 
 
-    cancelBookingEntry(obj) {
-
-      this.idxpos = this.bookingList.indexOf(obj);
-      this.bookingentry = obj;
-      this.service.cancelBookingEntry(this.bookingentry).subscribe(data => {
-
-  // openModal(template: TemplateRef<any>) {
-  //   this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-  // }
+  //   cancelBookingEntry(obj, template: TemplateRef<any>) {
+  //
+  //
+  //     this.bookingentry = obj;
+  //     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  //     // this.service.cancelBookingEntry(this.bookingentry).subscribe(data => {
+  //   //    this.idxpos = this.bookingList.indexOf(obj);
+  // // openModal(template: TemplateRef<any>) {
+  // //   this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  // // }
 
   confirm(): void {
     this.message = 'Confirmed!';
     console.log(this.bookingentry);
     this.service.cancelBookingEntry(this.bookingentry).subscribe(data => {
-
         this.updateSuccess = data;
         this.successFlag = true;
         this.service.findAllBookingInfobyUserId(this.userId).subscribe(newData => this.bookingList = newData);
