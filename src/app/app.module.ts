@@ -27,8 +27,10 @@ import {ModalModule} from 'ngx-bootstrap';
 import { FilterPipe } from './filter.pipe';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: SearchflightComponent},
+  {path: '', redirectTo: 'default', pathMatch: 'full'},
+  {path: 'home/default', component: SearchflightComponent},
+  {path: 'default', component: SearchflightComponent},
+  {path: 'bookflight', component: SearchflightComponent},
   {path: 'home/:selectedFlight', component: SearchflightComponent},
   {path: 'info', component: AboutusComponent},
   {path: 'history', component: BookinghistoryComponent},
@@ -39,7 +41,7 @@ const routes: Routes = [
   {path: 'schedule', component: SearchschedulesComponent},
   {path: 'flightticket', component: FlightticketComponent},
   {path: 'flightticket/:selectedTicket', component: FlightticketComponent},
-  {path: '**', redirectTo: 'home'}
+  {path: '**', redirectTo: 'default'}
   // {path: 'addcustomer', component: AddloancustomerComponent},
   // {path: 'showcustomer', component: ShowcustomerComponent},
   // {path: 'passenger', component: ShowpassengerComponent},

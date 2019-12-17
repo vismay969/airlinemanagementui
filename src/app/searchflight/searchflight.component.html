@@ -16,10 +16,17 @@
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
+
       </div>
       </div>
   </ng-container>
-  </div>
+          <span class = "error"
+                *ngIf="searchflightForm.get('arr_abbr').touched &&
+                   searchflightForm.get('dept_abbr').touched &&
+                   (searchflightForm.get('arr_abbr').value != '') &&
+                (searchflightForm.get('arr_abbr').value == searchflightForm.get('dept_abbr').value)"
+          >Arrival Airport cannot be same as Departure Airport</span>
+        </div>
 
   <div>
   <ng-container *ngFor="let eachConfig of formConfig2">

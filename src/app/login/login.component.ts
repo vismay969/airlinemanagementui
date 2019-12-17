@@ -21,9 +21,10 @@ export class LoginComponent implements OnInit {
   psgClass: string;
   inputFlight: any;
   loginStatus = '';
-  invalidUser: boolean;
+  invalidUser = false;
   serviceCallError: string;
   returnUrl: string;
+  returnParams: string[];
   username = '';
   password = '';
   role = '';
@@ -51,10 +52,15 @@ export class LoginComponent implements OnInit {
   ];
 
   ngOnInit() {
+    console.log(this.invalidUser);
     this.loginForm = this.createForm();
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl[0] || '/';
-    this.psgClass = this.route.snapshot.queryParams.returnUrl[1] || 0;
-    this.seatsCount = this.route.snapshot.queryParams.returnUrl[2] || 0;
+    this.returnParams =  (this.route.snapshot.queryParams.returnUrl || '/');
+    console.log(this.returnParams);
+    if (this.returnParams.length === 3) {
+    this.returnUrl = this.returnParams[0] || '/';
+    this.psgClass = this.returnParams[1] || '';
+    this.seatsCount = (Number(this.returnParams[2]) || 0);
+    }
     console.log(this.returnUrl);
     console.log(this.seatsCount);
     console.log(this.route.snapshot.queryParams.returnUrl);
@@ -98,7 +104,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('loggedUserId', String(this.loggedUserId));
       this.sessionService.changeLoginStatus('logged');
       console.log(this.returnUrl);
-      if (this.returnUrl === '/') {
+      if (this.returnParams[0] === '/') {
         this.router.navigateByUrl('/home');
       } else {
         // this.router.navigate(['/home', this.selectedFlight]);
