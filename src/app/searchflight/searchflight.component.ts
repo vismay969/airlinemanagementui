@@ -61,6 +61,7 @@ constructor(private fb: FormBuilder, private router: Router, private service: Us
 ngOnInit() {
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
+  this.searchflightForm.reset();
   this.returnParams = this.route.snapshot.queryParams.returnUrl || '';
   if (this.returnParams.length === 2) {
     this.seatsCount = (Number(this.returnParams[1]) || 0);
