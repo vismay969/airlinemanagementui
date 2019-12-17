@@ -92,10 +92,10 @@
 
 
   <div class="col-md-12">
-  <app-displayflightdetails [flightSelection]= 'flightList' [classSelected] = 'psgClass' [passengerCount] = 'seatsBus'
+  <app-displayflightdetails [flightSelection]= 'flightList' [classSelected] = 'psgClass' [passengerCount] = 'seatsCount'
                             (flightSelected)='onReceipt($event)' *ngIf="displayFlightList"></app-displayflightdetails>
 
-    <app-bookinginfo [flightSelected]= 'selectedFlight' [classSelected] = 'psgClass' [passengerCount] = 'seatsBus'
+    <app-bookinginfo [flightSelected]= 'selectedFlight' [classSelected] = 'psgClass' [passengerCount] = 'seatsCount'
                               (flightBooked)='onReturn($event)' *ngIf="bookFlight"></app-bookinginfo>
 
 
