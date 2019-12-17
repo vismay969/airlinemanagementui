@@ -42,7 +42,7 @@ export class BookinghistoryComponent implements OnInit {
   successFlag = false;
   // dateFormat = require('dateformat');
   now = new Date();
-
+  today = this.now.toISOString();
   // dateFormat(now, "mmm-dd-yyyy");
   constructor(private service: UserService, private router: Router, private modalService: BsModalService) {
   }

@@ -40,7 +40,7 @@
               class="btn btn-primary btn-block fa fa-envelope">&nbsp; &nbsp; Print Ticket &nbsp; &nbsp;</button>
     </td>
     <td>
-      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))"
+      <button *ngIf="((today) <= (eachBooking.flightDate) ) && ('N' === (eachBooking.statusFlag))"
               (click)="cancelBookingEntry(eachBooking,template)"
               class="btn btn-danger fa fa-remove">Cancel
       </button><!--    </td>-->
@@ -52,12 +52,10 @@
         </div>
       </ng-template>
       <!--    <td>-->
-      <button *ngIf="((now | date) >= (eachBooking.flightDate | date))
+      <button *ngIf="((today) >= (eachBooking.flightDate) )
       && ('N' === (eachBooking.statusFlag))"
               class="btn btn-secondary btn-block fa fa-archive" [disabled]="true">&nbsp;&nbsp;Travelled &nbsp;&nbsp;</button>
-      <!--    </td>-->
 
-      <!--    <td>-->
       <button *ngIf="('Y' === (eachBooking.statusFlag))"
               class="btn btn-warning btn-block fa fa-exclamation" [disabled]="true">&nbsp;&nbsp;Cancelled&nbsp;&nbsp;</button>
     </td>

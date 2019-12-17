@@ -24,6 +24,7 @@ import { EditflightscheduleComponent } from './editflightschedule/editflightsche
 import { AirportinfoComponent } from './airportinfo/airportinfo.component';
 import { ViewflightmasterComponent } from './viewflightmaster/viewflightmaster.component';
 import {ModalModule} from 'ngx-bootstrap';
+import { FilterPipe } from './filter.pipe';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -64,6 +65,7 @@ const routes: Routes = [
     EditflightscheduleComponent,
     AirportinfoComponent,
     ViewflightmasterComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
