@@ -56,10 +56,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.createForm();
     this.returnParams =  (this.route.snapshot.queryParams.returnUrl || '/');
     console.log(this.returnParams);
-    if (this.returnParams.length === 3) {
+    if (this.returnParams.length === 1) {
     this.returnUrl = this.returnParams[0] || '/';
-    this.psgClass = this.returnParams[1] || '';
-    this.seatsCount = (Number(this.returnParams[2]) || 0);
+    }
+    if (this.returnParams.length === 3) {
+      this.returnUrl = this.returnParams[0] || '/';
+      this.psgClass = this.returnParams[1] || '';
+      this.seatsCount = (Number(this.returnParams[2]) || 0);
     }
     console.log(this.returnUrl);
     console.log(this.seatsCount);
@@ -105,8 +108,16 @@ export class LoginComponent implements OnInit {
       this.sessionService.changeLoginStatus('logged');
       console.log(this.returnUrl);
       if (this.returnParams[0] === '/') {
+        console.log('default url');
         this.router.navigateByUrl('/home');
+      } else if (this.returnParams[0] === '/') {
+        this.router.navigateByUrl(this.returnUrl);
       } else {
+        console.log('redirect to book flight');
+        console.log(this.selectedFlight);
+        console.log(this.returnUrl);
+        console.log(this.psgClass);
+        console.log(this.seatsCount);
         // this.router.navigate(['/home', this.selectedFlight]);
         this.router.navigate([this.returnUrl, this.selectedFlight],
         { queryParams: { returnUrl: [this.psgClass, this.seatsCount]}});

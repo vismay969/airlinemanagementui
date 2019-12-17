@@ -25,20 +25,22 @@ import { AirportinfoComponent } from './airportinfo/airportinfo.component';
 import { ViewflightmasterComponent } from './viewflightmaster/viewflightmaster.component';
 import {ModalModule} from 'ngx-bootstrap';
 import { FilterPipe } from './filter.pipe';
+import {MyguardGuard} from './myguard.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: 'default', pathMatch: 'full'},
   {path: 'home/default', component: SearchflightComponent},
+  // {path: 'default', component: SearchflightComponent, canDeactivate: [MyguardGuard]},
   {path: 'default', component: SearchflightComponent},
   {path: 'bookflight', component: SearchflightComponent},
   {path: 'home/:selectedFlight', component: SearchflightComponent},
   {path: 'info', component: AboutusComponent},
   {path: 'history', component: BookinghistoryComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'login/:selectedFlight', component: LoginComponent},
-  {path: 'register', component: RegisteruserComponent},
+  {path: 'login', component: LoginComponent, canDeactivate: [MyguardGuard]},
+  {path: 'login/:selectedFlight', component: LoginComponent, canDeactivate: [MyguardGuard]},
+  {path: 'register', component: RegisteruserComponent, canDeactivate: [MyguardGuard]},
   {path: 'logout', component: LogoutComponent},
-  {path: 'schedule', component: SearchschedulesComponent},
+  {path: 'schedule', component: SearchschedulesComponent, canDeactivate: [MyguardGuard]},
   {path: 'flightticket', component: FlightticketComponent},
   {path: 'flightticket/:selectedTicket', component: FlightticketComponent},
   {path: '**', redirectTo: 'default'}

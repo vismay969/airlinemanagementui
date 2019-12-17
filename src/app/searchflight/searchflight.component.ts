@@ -59,12 +59,15 @@ PassengerCount = [1, 2, 3, 4, 5, 6];
 constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) { }
 
 ngOnInit() {
+  console.log(this.router.url);
   console.log('In Init');
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
-  this.searchflightForm.reset();
+  // this.searchflightForm.reset();
+  console.log(this.route.snapshot.queryParams.returnUrl);
   this.returnParams = this.route.snapshot.queryParams.returnUrl || '';
   if (this.returnParams.length === 2) {
+    console.log('In Params');
     this.seatsCount = (Number(this.returnParams[1]) || 0);
     this.psgClass = this.returnParams[0] || '';
   }
@@ -145,7 +148,7 @@ onSubmit() {
     if (loggedStatus !== 'yes') {
       console.log('redirect to login');
       this.router.navigate(['/login', this.selectedFlight],
-        { queryParams: { returnUrl: ['/home', this.psgClass, this.seatsCount] }});
+        { queryParams: { returnUrl: [this.router.url, this.psgClass, this.seatsCount] }});
       this.displayFlightList = false;
       this.bookFlight = true;
     } else {
