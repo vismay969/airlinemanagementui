@@ -23,6 +23,7 @@
     <th>Class</th>
     <th>Seats Booked</th>
     <th>Total Fare</th>
+    <th>Print Ticket</th>
     <th>Status</th>
 
 
@@ -35,20 +36,24 @@
     <td>{{eachBooking.noOfPass}}</td>
     <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
     <td>
+    <button (click)="viewTicket(eachBooking)"
+            class="btn btn-primary btn-block fa fa-envelope">&nbsp; &nbsp; Print Ticket &nbsp; &nbsp;</button>
+    </td>
+    <td>
       <button *ngIf="((now | date) <= (eachBooking.flightDate | date))
       && ('N' === (eachBooking.statusFlag))" (click)="cancelBookingEntry(eachBooking)"
-              class="btn btn-danger btn-block fa fa-remove">Cancel</button>
+              class="btn btn-danger btn-block fa fa-remove">&nbsp; &nbsp; Cancel &nbsp; &nbsp;</button>
 <!--    </td>-->
 
 <!--    <td>-->
       <button *ngIf="((now | date) >= (eachBooking.flightDate | date))
       && ('N' === (eachBooking.statusFlag))"
-               class="btn btn-secondary btn-block fa fa-archive" [disabled]="true">Departed</button>
+               class="btn btn-secondary btn-block fa fa-archive" [disabled]="true">&nbsp;&nbsp;Departed &nbsp;&nbsp;</button>
 <!--    </td>-->
 
 <!--    <td>-->
     <button *ngIf="('Y' === (eachBooking.statusFlag))"
-               class="btn btn-warning btn-block fa fa-exclamation" [disabled]="true">Cancelled</button>
+               class="btn btn-warning btn-block fa fa-exclamation" [disabled]="true">&nbsp;&nbsp;Cancelled&nbsp;&nbsp;</button>
     </td>
 
   </tr>

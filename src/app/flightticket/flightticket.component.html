@@ -1,3 +1,8 @@
+<div class="alert alert-success" [hidden] = "!emailSent">
+  <div>
+     Email Sent Successfully !!!
+  </div>
+</div>
 
 <form (ngSubmit)="onSubmit(frm.value)" #frm="ngForm" >
 
@@ -64,13 +69,11 @@
   </div>
 
     <div class="row">
-      <div class = "col-md-5"></div>
-      <div class="col-md-1">
-          <input class="btn btn-success" type="submit" value="Resend Email">
-      </div>
-      <div class="col-md-6">
+      <div class = "col text-center">
+        <button (click)="sendEmail() "class="btn btn-info">&nbsp;Resend Email &nbsp;</button>
       </div>
     </div>
+
 
   </div>
 </form>

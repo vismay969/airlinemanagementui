@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BookingInfo} from '../bookinginfo';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-flightticket',
@@ -10,7 +11,8 @@ import {BookingInfo} from '../bookinginfo';
 export class FlightticketComponent implements OnInit {
   flightticket: BookingInfo;
   selectedticket: any;
-  constructor(private route: ActivatedRoute) { }
+  emailSent = false;
+  constructor(private service: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -20,8 +22,12 @@ export class FlightticketComponent implements OnInit {
     });
     console.log(this.flightticket);
   }
-  onSubmit() {
-    // add Email Service
+
+  onSubmit(value: any) {
+  }
+  sendEmail() {
+    this.service.sendEmail(this.flightticket).subscribe(data => {console.log(data); });
+    this.emailSent = true;
   }
 
 }

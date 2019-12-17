@@ -12,11 +12,12 @@
         <option *ngFor="let eachAirport of airportList"
                 [value]='eachAirport.location_abbr'>{{eachAirport.location_abbr}}</option>
       </select>
-      </div>
+
       <span class = "error"
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
       </span>
+      </div>
       </div>
   </ng-container>
   </div>
@@ -78,7 +79,7 @@
             <!--        <div class = "leftbox"></div>-->
             <!--        <div class = "leftbox"></div>-->
             <div class="rightbox">
-              <input class="btn btn-success" type="submit" value="Search Flight" [disabled]="searchflightForm.invalid">
+              <input class="btn btn-info" type="submit" value="Search Flight" [disabled]="searchflightForm.invalid">
             </div>
           </div>
           <div class="col-md-6">

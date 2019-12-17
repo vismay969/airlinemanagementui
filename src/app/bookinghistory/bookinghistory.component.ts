@@ -29,6 +29,7 @@ export class BookinghistoryComponent implements OnInit {
 
 
   bookingList: BookingInfo[];
+  selectedTicket: BookingInfo;
   userId: string;
   idxpos = 0;
   p: number;
@@ -58,8 +59,16 @@ export class BookinghistoryComponent implements OnInit {
 
   }
 
+  viewTicket(obj) {
+    this.selectedTicket = obj;
+    console.log(this.selectedTicket);
+    this.router.navigate(['/flightticket', this.selectedTicket]);
+    console.log('not routing');
+  }
 
-  cancelBookingEntry(obj) {
+
+
+    cancelBookingEntry(obj) {
 
       this.idxpos = this.bookingList.indexOf(obj);
       this.bookingentry = obj;

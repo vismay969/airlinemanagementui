@@ -50,4 +50,9 @@ export class UserService {
     return this.client.put<BookingInfo>(this.baseURL + '/bookingInfo' , bookingInfoData);
   }
 
+  sendEmail(bookingInfoData: BookingInfo): Observable<BookingInfo> {
+     return this.client.post<BookingInfo>(this.baseURL + '/sendEmail/' , bookingInfoData);
+  }
+
+
 }
