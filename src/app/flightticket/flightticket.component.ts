@@ -10,7 +10,9 @@ import {BookingInfo} from '../bookinginfo';
 export class FlightticketComponent implements OnInit {
   flightticket: BookingInfo;
   selectedticket: any;
-  constructor(private route: ActivatedRoute) { }
+
+  constructor(private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -20,6 +22,7 @@ export class FlightticketComponent implements OnInit {
     });
     console.log(this.flightticket);
   }
+
   onSubmit() {
     // add Email Service
   }

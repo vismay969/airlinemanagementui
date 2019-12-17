@@ -42,7 +42,7 @@ export class EditflightscheduleComponent implements OnInit {
 
     this.flightInfo.dept_date = '';
     this.flightInfo.dept_time = '';
-    this.flightInfo.arr_date = '' ;
+    this.flightInfo.arr_date = '';
     this.flightInfo.arr_time = '';
     this.flightInfo.fare_business = 0;
     this.flightInfo.fare_first = 0;
@@ -54,7 +54,7 @@ export class EditflightscheduleComponent implements OnInit {
     console.log(value);
     this.flightInfo.dept_date = this.flightSelectedObj.dept_date;
     this.flightInfo.dept_time = this.flightSelectedObj.dept_time;
-    this.flightInfo.arr_date = this.flightSelectedObj.arr_date ;
+    this.flightInfo.arr_date = this.flightSelectedObj.arr_date;
     this.flightInfo.arr_time = this.flightSelectedObj.arr_time;
     this.flightInfo.fare_business = this.flightSelectedObj.fare_business;
     this.flightInfo.fare_first = this.flightSelectedObj.fare_first;
@@ -68,9 +68,10 @@ export class EditflightscheduleComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.succcessFlag.emit(true);
-      }, (err) => {  this.captureError(err);
-                     this.succcessFlag.emit(false);
-        } );
+      }, (err) => {
+        this.captureError(err);
+        this.succcessFlag.emit(false);
+      });
   }
 
   captureError(error) {

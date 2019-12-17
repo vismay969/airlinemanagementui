@@ -52,7 +52,8 @@ private loginStatus = 'invalid user';
 FlightClass = ['Business', 'First'];
 PassengerCount = [1, 2, 3, 4, 5, 6];
 
-constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) {
+  }
 
 ngOnInit() {
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
@@ -129,9 +130,9 @@ onSubmit() {
     const loggedStatus = sessionStorage.getItem('userLogged');
     console.log(loggedStatus);
     if (loggedStatus !== 'yes') {
-        this.router.navigate(['/login', this.selectedFlight], { queryParams: { returnUrl: ['/home'] }});
-        this.displayFlightList = false;
-        this.bookFlight = true;
+      this.router.navigate(['/login', this.selectedFlight], {queryParams: {returnUrl: ['/home']}});
+      this.displayFlightList = false;
+      this.bookFlight = true;
     } else {
       this.displayFlightList = false;
       this.bookFlight = true;

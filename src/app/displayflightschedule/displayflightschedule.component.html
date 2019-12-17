@@ -1,23 +1,23 @@
 <div *ngIf="displayFlightList">
 
-<div>Search By AirLine:
-  <input [(ngModel)]="srchString"/></div>
+  <div>Search By AirLine:
+    <input [(ngModel)]="srchString"/></div>
 
-<div class="alert alert-success" *ngIf="statusFlag">
-  Flight Edited Successfully
-</div>
-<div>
-<table class="table table-striped" >
+  <div class="alert alert-success" *ngIf="statusFlag">
+    Flight Edited Successfully
+  </div>
+  <div>
+    <table class="table table-striped">
 
-<!--  <tr>-->
-<!--    <td>-->
-<!--      {{classSelected}}-->
-<!--    </td>-->
-<!--    <td>-->
-<!--      {{passengerCount}}-->
-<!--    </td>-->
-<!--  </tr>-->
-<thead>
+      <!--  <tr>-->
+      <!--    <td>-->
+      <!--      {{classSelected}}-->
+      <!--    </td>-->
+      <!--    <td>-->
+      <!--      {{passengerCount}}-->
+      <!--    </td>-->
+      <!--  </tr>-->
+      <thead>
   <tr>
     <th>AirLine</th>
     <th>From</th>
@@ -49,10 +49,10 @@
 </table>
 
 <pagination-controls (pageChange)="page=$event"></pagination-controls>
-</div>
+  </div>
 </div>
 <div class="col-md-12">
-<app-editflightschedule [flightSelectedObj]= 'flightSelected'
-                        (succcessFlag)='onReturn($event)' *ngIf="editFlight"></app-editflightschedule>
+  <app-editflightschedule [flightSelectedObj]='flightSelected'
+                          (succcessFlag)='onReturn($event)' *ngIf="editFlight"></app-editflightschedule>
 
 </div>

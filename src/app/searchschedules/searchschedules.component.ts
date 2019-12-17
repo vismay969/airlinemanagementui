@@ -22,17 +22,21 @@ export class SearchschedulesComponent implements OnInit {
   adminsearchscheduleForm: FormGroup;
 
   formConfig1: any[] = [
-    {name: 'dept_abbr', type: 'text', label: 'Departure Airport', text : 'leftbox',
+    {
+      name: 'dept_abbr', type: 'text', label: 'Departure Airport', text: 'leftbox',
       errorMsg: 'Departure Airport Required',
       constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
-    {name: 'arr_abbr', type: 'text', label: 'Arrival Airport', text : 'leftbox',
+    {
+      name: 'arr_abbr', type: 'text', label: 'Arrival Airport', text: 'leftbox',
       errorMsg: 'Arrival Airport Required',
       constraint: [Validators.required, Validators.minLength(3), Validators.maxLength(3)] },
   ];
   formConfig2: any[] = [
-    {name: 'dept_date', type: 'date', label: 'Departure Date', text : 'leftbox',
+    {
+      name: 'dept_date', type: 'date', label: 'Departure Date', text: 'leftbox',
       errorMsg: 'Departure Date Required',
-      constraint: Validators.required},
+      constraint: Validators.required
+    },
   ];
 
   displayFlightList = false;
