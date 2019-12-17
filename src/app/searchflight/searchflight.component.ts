@@ -24,8 +24,9 @@ export class SearchflightComponent implements OnInit {
   seatsCount: number;
   displayFlightList = false;
   bookFlight = false;
+  returnParams: string[];
   airportList: AirportMaster[];
-  returnUrl: string;
+  // returnUrl: string;
 
   searchflightForm: FormGroup;
   formConfig1: any[] = [
@@ -60,8 +61,11 @@ constructor(private fb: FormBuilder, private router: Router, private service: Us
 ngOnInit() {
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
-  this.seatsCount = this.route.snapshot.queryParams.returnUrl[1] || 0;
-  this.psgClass = this.route.snapshot.queryParams.returnUrl[0] || '';
+  this.returnParams = this.route.snapshot.queryParams.returnUrl || '';
+  if (this.returnParams.length === 2) {
+    this.seatsCount = this.route.snapshot.queryParams.returnUrl[1] || 0;
+    this.psgClass = this.route.snapshot.queryParams.returnUrl[0] || '';
+  }
   this.route.params.subscribe(params => {
     console.log(params);
     this.inputFlight = params;
