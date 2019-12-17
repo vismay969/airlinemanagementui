@@ -15,16 +15,16 @@
 
 <table class="table table-dark table-striped table-hover table-bordered">
   <thead class="thead-dark">
-<!--    <th>From</th>-->
-<!--    <th>To</th>-->
-<!--    <th>Airline</th>-->
-    <th>Flight Date</th>
-    <th>Customer Email</th>
-    <th>Class</th>
-    <th>Seats Booked</th>
-    <th>Total Fare</th>
-    <th>Print Ticket</th>
-    <th>Status</th>
+  <!--    <th>From</th>-->
+  <!--    <th>To</th>-->
+  <!--    <th>Airline</th>-->
+  <th>Flight Date</th>
+  <th>Customer Email</th>
+  <th>Class</th>
+  <th>Seats Booked</th>
+  <th>Total Fare</th>
+  <th>Print Ticket</th>
+  <th>Status</th>
 
 
   </thead>
@@ -36,24 +36,30 @@
     <td>{{eachBooking.noOfPass}}</td>
     <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
     <td>
-    <button (click)="viewTicket(eachBooking)"
-            class="btn btn-primary btn-block fa fa-envelope">&nbsp; &nbsp; Print Ticket &nbsp; &nbsp;</button>
+      <button (click)="viewTicket(eachBooking)"
+              class="btn btn-primary btn-block fa fa-envelope">&nbsp; &nbsp; Print Ticket &nbsp; &nbsp;</button>
     </td>
     <td>
-      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))
-      && ('N' === (eachBooking.statusFlag))" (click)="cancelBookingEntry(eachBooking)"
-              class="btn btn-danger btn-block fa fa-remove">&nbsp; &nbsp; Cancel &nbsp; &nbsp;</button>
-<!--    </td>-->
-
-<!--    <td>-->
+      <button *ngIf="((now | date) <= (eachBooking.flightDate | date))"
+              (click)="cancelBookingEntry(eachBooking,template)"
+              class="btn btn-danger fa fa-remove">Cancel
+      </button><!--    </td>-->
+      <ng-template #template>
+        <div class="modal-body text-center">
+          <p>Do you want to confirm?</p>
+          <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+          <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+      </ng-template>
+      <!--    <td>-->
       <button *ngIf="((now | date) >= (eachBooking.flightDate | date))
       && ('N' === (eachBooking.statusFlag))"
-               class="btn btn-secondary btn-block fa fa-archive" [disabled]="true">&nbsp;&nbsp;Departed &nbsp;&nbsp;</button>
-<!--    </td>-->
+              class="btn btn-secondary btn-block fa fa-archive" [disabled]="true">&nbsp;&nbsp;Travelled &nbsp;&nbsp;</button>
+      <!--    </td>-->
 
-<!--    <td>-->
-    <button *ngIf="('Y' === (eachBooking.statusFlag))"
-               class="btn btn-warning btn-block fa fa-exclamation" [disabled]="true">&nbsp;&nbsp;Cancelled&nbsp;&nbsp;</button>
+      <!--    <td>-->
+      <button *ngIf="('Y' === (eachBooking.statusFlag))"
+              class="btn btn-warning btn-block fa fa-exclamation" [disabled]="true">&nbsp;&nbsp;Cancelled&nbsp;&nbsp;</button>
     </td>
   </tr>
 </table>
