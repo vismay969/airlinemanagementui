@@ -57,9 +57,9 @@ export class LoginComponent implements OnInit {
     this.returnParams =  (this.route.snapshot.queryParams.returnUrl || '/');
     console.log(this.returnParams);
     if (this.returnParams.length === 3) {
-    this.returnUrl = this.route.snapshot.queryParams.returnParams[0] || '/';
-    this.psgClass = this.route.snapshot.queryParams.returnParams[1] || 0;
-    this.seatsCount = this.route.snapshot.queryParams.returnParams[2] || 0;
+    this.returnUrl = this.returnParams[0] || '/';
+    this.psgClass = this.returnParams[1] || '';
+    this.seatsCount = (Number(this.returnParams[2]) || 0);
     }
     console.log(this.returnUrl);
     console.log(this.seatsCount);

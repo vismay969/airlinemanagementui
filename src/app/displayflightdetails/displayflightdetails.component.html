@@ -1,4 +1,8 @@
-<table class="table table-dark table-striped">
+<div class="alert alert-danger" *ngIf="flightSelection.length == 0">
+  Sorry . No Flights found for your search
+</div>
+
+<table class="table table-dark table-striped" *ngIf="flightSelection.length > 0">
   <thead><td>Search By AirLine</td>
   <td><input [(ngModel)]="srchString"></td>
   <tr>
@@ -30,4 +34,4 @@
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="page=$event"></pagination-controls>
+<pagination-controls (pageChange)="page=$event" *ngIf="flightSelection.length > 0"></pagination-controls>

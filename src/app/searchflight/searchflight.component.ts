@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {FlightList} from '../flightlist';
 import {BookingInfo} from '../bookinginfo';
 
+
 @Component({
   selector: 'app-searchflight',
   templateUrl: './searchflight.component.html',
@@ -26,7 +27,13 @@ export class SearchflightComponent implements OnInit {
   bookFlight = false;
   returnParams: string[];
   airportList: AirportMaster[];
+
   // returnUrl: string;
+  now = new Date();
+  month = this.now.getMonth() + 1;
+  today = this.now.getFullYear().toString() + '-' + this.month.toString() + '-' + this.now.getUTCDate().toString();
+  minDate = this.today;
+  maxDate = '2020-12-31';
 
   searchflightForm: FormGroup;
   formConfig1: any[] = [
@@ -59,12 +66,14 @@ PassengerCount = [1, 2, 3, 4, 5, 6];
 constructor(private fb: FormBuilder, private router: Router, private service: UserService, private route: ActivatedRoute) { }
 
 ngOnInit() {
+  console.log('In Init');
   this.service.findAllAirports('airport').subscribe(data => this.airportList = data);
   this.searchflightForm = this.createForm();
+  this.searchflightForm.reset();
   this.returnParams = this.route.snapshot.queryParams.returnUrl || '';
   if (this.returnParams.length === 2) {
-    this.seatsCount = this.route.snapshot.queryParams.returnUrl[1] || 0;
-    this.psgClass = this.route.snapshot.queryParams.returnUrl[0] || '';
+    this.seatsCount = (Number(this.returnParams[1]) || 0);
+    this.psgClass = this.returnParams[0] || '';
   }
   this.route.params.subscribe(params => {
     console.log(params);
