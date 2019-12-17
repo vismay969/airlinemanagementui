@@ -12,7 +12,6 @@
         <option *ngFor="let eachAirport of airportList"
                 [value]='eachAirport.location_abbr'>{{eachAirport.location_abbr}}</option>
       </select>
-
       <span class = "error"
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
               && searchflightForm.get(eachConfig.name).touched">{{eachConfig.errorMsg}}
@@ -35,7 +34,7 @@
       <label>{{eachConfig.label}}</label>
       <input type ={{eachConfig.type}}
              formControlName={{eachConfig.name}}
-             class="form-control">
+             class="form-control" [min]="minDate" [max]="maxDate">
 
       <span class = "error"
         *ngIf="searchflightForm.get(eachConfig.name).hasError('required')
