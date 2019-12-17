@@ -31,6 +31,7 @@ export class BookinghistoryComponent implements OnInit {
 
 
   bookingList: BookingInfo[];
+  selectedTicket: BookingInfo;
   userId: string;
   idxpos = 0;
   p: number;
@@ -61,6 +62,22 @@ export class BookinghistoryComponent implements OnInit {
 
   }
 
+
+  viewTicket(obj) {
+    this.selectedTicket = obj;
+    console.log(this.selectedTicket);
+    this.router.navigate(['/flightticket', this.selectedTicket]);
+    console.log('not routing');
+  }
+
+
+
+    cancelBookingEntry(obj) {
+
+      this.idxpos = this.bookingList.indexOf(obj);
+      this.bookingentry = obj;
+      this.service.cancelBookingEntry(this.bookingentry).subscribe(data => {
+
   // openModal(template: TemplateRef<any>) {
   //   this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   // }
@@ -69,6 +86,7 @@ export class BookinghistoryComponent implements OnInit {
     this.message = 'Confirmed!';
     console.log(this.bookingentry);
     this.service.cancelBookingEntry(this.bookingentry).subscribe(data => {
+
         this.updateSuccess = data;
         this.successFlag = true;
         this.service.findAllBookingInfobyUserId(this.userId).subscribe(newData => this.bookingList = newData);
