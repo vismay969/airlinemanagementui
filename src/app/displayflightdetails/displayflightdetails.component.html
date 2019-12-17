@@ -2,7 +2,7 @@
   Sorry . No Flights found for your search
 </div>
 
-<table class="table table-dark table-striped" *ngIf="flightSelection.length > 0">
+<table class="table table-dark table-striped table-hover" *ngIf="flightSelection.length > 0">
   <thead><td>Search By AirLine</td>
   <td><input [(ngModel)]="srchString"></td>
   <tr>
@@ -29,7 +29,7 @@
     <td>{{eachflight.dept_time | date: 'medium'}}</td>
     <td>{{eachflight.arr_time | date: 'medium'}}</td>
     <td>{{eachflight.fare_business | currency: 'INR'}}</td>
-    <button (click)="onBook(eachflight)" class="btn btn-info fa fa-plane"> Book</button>
+    <button (click)="onBook(eachflight)" class="btn btn-info btn-block fa fa-plane"> &nbsp; Book &nbsp; </button>
   </tr>
   </tbody>
 </table>

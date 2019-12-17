@@ -37,7 +37,7 @@
     <td>{{eachBooking.total_fare | currency: 'INR'}}</td>
     <td>
       <button (click)="viewTicket(eachBooking)"
-              class="btn btn-primary btn-block fa fa-envelope">&nbsp; &nbsp; Print Ticket &nbsp; &nbsp;</button>
+              class="btn btn-primary btn-block fa fa-envelope">&nbsp; &nbsp; View Ticket &nbsp; &nbsp;</button>
     </td>
     <td>
       <button *ngIf="((today) <= (eachBooking.flightDate) ) && ('N' === (eachBooking.statusFlag))"

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Navlink} from '../navlink';
 import {UserService} from '../user.service';
 import {CompinteractionService} from '../compinteraction.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +13,7 @@ export class MenuComponent implements OnInit {
   showLogin = 'inline';
   showLogout = 'none';
   visitor = true;
+  selectedlink: string;
 
   userlinks: Navlink[] = [
     {link: 'home/default', text: 'Home'},
@@ -27,9 +29,11 @@ export class MenuComponent implements OnInit {
   ];
 
 
-  constructor(private service: CompinteractionService) { }
+  constructor(private service: CompinteractionService, private router: Router) { }
 
   ngOnInit() {
+    console.log(this.router.url);
+    this.selectedlink = this.router.url;
     this.service.loginStatus.subscribe(resp => {
       console.log(resp);
       if (resp === 'logged') {
